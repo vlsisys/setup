@@ -2,4 +2,4 @@
 # [Bash Environment Setup]
 cp .bash_aliases ~
 cp .vimrc ~
-cp -rf bundle/ ~/.vim/
+cp -rf bundle ~/.vim/
