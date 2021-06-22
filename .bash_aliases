@@ -1,5 +1,4 @@
 
-export	DISPLAY=localhost:10.0
 export	PS1="[\[\e[0;36m\]\u - \[\e[0;37m\]\D{%Y.%m.%d} \t\[\e[0;39m\]]\n\[\e[0;31m\]\${PWD}: \[\e[0;39m\]"
 
 alias	src='source ~/.bashrc'
