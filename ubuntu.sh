@@ -17,21 +17,26 @@ sudo apt-get -y install cmake clang ctags
 # [Python]
 sudo pip3 install --upgrade pip launchpadlib setuptools
 sudo pip3 install numpy pandas scipy matplotlib pillow pypi progress idx2numpy xlrd
-sudo pip3 install jupyter jupyterlab jupyterlab_vim
+sudo pip3 install jupyter jupyterlab
 
 # [TensorFlow]
 sudo pip3 install tensorflow
 
-# [Pytorch]
-sudo pip3 install torch torchvision
+# [Pytorch: should be checked official guideline depending on cudaDNN and OS version]
+#sudo pip3 install torch torchvision
 
 # [Bash Environment Setup]
 cp .bash_aliases ~
 cp .vimrc ~
-cp -rf bundle/ ~/.vim/
-cp -rf sudo/ /usr/share/fonts/truetype/
+mkdir -p ~/.vim
+mkdir -p ~/project
+cp -rf bundle ~/.vim/
 
+source ~/.bashrc
+
+# [Ubuntu Driver Install]
 sudo ubuntu-drivers autoinstall
+
 #sudo reboot
 
 
