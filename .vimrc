@@ -52,7 +52,7 @@ syntax  on
 "set guifont=InputMono:h11
 "set guifont=Fira\ Code:h12
 "set guifont=Ubuntu\ Mono:h12
-set guifont=Sudo\ 24
+set guifont=Sudo\ 18
 set linespace=2
 set nocursorcolumn
 set nocursorline
