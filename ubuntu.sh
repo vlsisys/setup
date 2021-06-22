@@ -19,12 +19,6 @@ sudo pip3 install --upgrade pip launchpadlib setuptools
 sudo pip3 install numpy pandas scipy matplotlib pillow pypi progress idx2numpy xlrd
 sudo pip3 install jupyter jupyterlab
 
-# [TensorFlow]
-sudo pip3 install tensorflow
-
-# [Pytorch: should be checked official guideline depending on cudaDNN and OS version]
-#sudo pip3 install torch torchvision
-
 # [Bash Environment Setup]
 cp .bash_aliases ~
 cp .vimrc ~
@@ -38,5 +32,3 @@ source ~/.bashrc
 sudo ubuntu-drivers autoinstall
 
 #sudo reboot
-
-
