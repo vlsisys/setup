@@ -8,8 +8,8 @@
 # ----------------------------------------------
 cp .bash_aliases ~
 cp .vimrc ~
-mkdir -p ~/.vim
 mkdir -p ~/project
+mkdir -p ~/.vim
 cp -rf bundle ~/.vim/
 
 echo "======================================================================\n"
@@ -26,4 +26,6 @@ echo "======================================================================\n"
 echo " For vim user, the following command can be used\n"
 echo "  $ jupyter qtconsole &\n"
 echo "  $ g <your_code>.py\n"
+echo "  @vim JupyterConnect\n"
+echo "  @vim JupyterRunFile\n"
 echo "======================================================================\n"
