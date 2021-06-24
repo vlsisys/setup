@@ -29,6 +29,7 @@ jupyterServerPassWord=`head -n 3 ${pwdFile} | tail -1 | cut -f 4 -d \"`
 
 printf "\n" 													>>	~/.jupyter/jupyter_lab_config.py
 printf "c.ServerApp.ip = '*'\n" 								>>	~/.jupyter/jupyter_lab_config.py
+printf "c.ServerApp.port = 8888\n" 								>>	~/.jupyter/jupyter_lab_config.py
 printf "c.ServerApp.password = '${jupyterServerPassWord}'\n" 	>>	~/.jupyter/jupyter_lab_config.py
 
 # ----------------------------------------------
