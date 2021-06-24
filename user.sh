@@ -33,7 +33,6 @@ printf "c.ServerApp.port = 8888\n" 								>>	~/.jupyter/jupyter_lab_config.py
 printf "c.ServerApp.port_retries = 0\n" 								>>	~/.jupyter/jupyter_lab_config.py
 printf "c.ServerApp.password = '${jupyterServerPassWord}'\n" 	>>	~/.jupyter/jupyter_lab_config.py
 
-
 # ----------------------------------------------
 # [Jupyter Qt Console for Vim User - Optional]
 # ----------------------------------------------
