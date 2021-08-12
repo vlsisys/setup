@@ -55,17 +55,17 @@ if [ `whoami` == "root" ]; then
 	# ----------------------------------------------
 	# [Samba]
 	# ----------------------------------------------
-	mkdir -p /vlsisys-samba
-	chmod 777 /vlsisys-samba
-	sudo ufw allow samba
+#	mkdir -p /vlsisys-samba
+#	chmod 777 /vlsisys-samba
+#	sudo ufw allow samba
 	
-	printf "\n"							>> /etc/samba/smb.conf
-	printf "[vlsisys-samba]\n"			>> /etc/samba/smb.conf
-	printf "\tcomment = vlsisys-samba\n">> /etc/samba/smb.conf
-	printf "\tbrowseable = yes\n"		>> /etc/samba/smb.conf
-	printf "\tpath = /vlsisys-samba\n"	>> /etc/samba/smb.conf
-	printf "\tguest ok = yes\n"			>> /etc/samba/smb.conf
-	printf "\tread only = no\n"			>> /etc/samba/smb.conf
+#	printf "\n"							>> /etc/samba/smb.conf
+#	printf "[vlsisys-samba]\n"			>> /etc/samba/smb.conf
+#	printf "\tcomment = vlsisys-samba\n">> /etc/samba/smb.conf
+#	printf "\tbrowseable = yes\n"		>> /etc/samba/smb.conf
+#	printf "\tpath = /vlsisys-samba\n"	>> /etc/samba/smb.conf
+#	printf "\tguest ok = yes\n"			>> /etc/samba/smb.conf
+#	printf "\tread only = no\n"			>> /etc/samba/smb.conf
 	
 	# ----------------------------------------------
 	# [Ubuntu Driver Install]
