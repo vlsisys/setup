@@ -11,7 +11,7 @@ if [ `whoami` == "root" ]; then
 	sudo apt-get -y update
 	sudo apt-get -y install iproute2 gcc g++ net-tools libncurses5-dev zlib1g:i386 libssl-dev flex bison
 	sudo apt-get -y install libselinux1 xterm autoconf libtool texinfo zlib1g-dev gcc-multilib screen pax gawk
-	sudo apt-get -y install python3 python3-pexpect python3-pip python3-git python3-jinja2
+	sudo apt-get -y install python3 python3-pexpect python3-pip python3-git python3-jinja2 python3-dev python3-tk
 	sudo apt-get -y install xz-utils debianutils iputils-ping libegl1-mesa libsdl1.2-dev pylint3 cpio
 
 	# ----------------------------------------------
