@@ -1,6 +1,6 @@
 
 export	PS1="[\[\e[0;36m\]\u - \[\e[0;37m\]\D{%Y.%m.%d} \t\[\e[0;39m\]]\n\[\e[0;31m\]\${PWD}: \[\e[0;39m\]"
-export	DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+# export	DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 
 alias	src='source ~/.bashrc'
 alias	g='gvim -p > /dev/null'
