@@ -29,9 +29,41 @@ jupyterServerPassWord=`head -n 3 ${pwdFile} | tail -1 | cut -f 4 -d \"`
 
 printf "\n" 													>>	~/.jupyter/jupyter_lab_config.py
 printf "c.ServerApp.ip = '*'\n" 								>>	~/.jupyter/jupyter_lab_config.py
-printf "c.ServerApp.port = 8888\n" 								>>	~/.jupyter/jupyter_lab_config.py
-printf "c.ServerApp.port_retries = 0\n" 								>>	~/.jupyter/jupyter_lab_config.py
+#printf "c.ServerApp.port = 8888\n" 							>>	~/.jupyter/jupyter_lab_config.py
+printf "c.ServerApp.port_retries = 0\n" 						>>	~/.jupyter/jupyter_lab_config.py
 printf "c.ServerApp.password = '${jupyterServerPassWord}'\n" 	>>	~/.jupyter/jupyter_lab_config.py
+
+case $USER in
+	"root")
+		echo "======================================================================"
+		echo " Error: User [$USER]'s jupyter port is not permitted!!!"
+		echo "======================================================================"
+		;;
+	"woong")
+		port_num=8888
+		;;
+	"yyj")
+		port_num=8890
+		;;
+	"jaeeun")
+		port_num=8989
+		;;
+	"jungeun")
+		port_num=8891
+		;;
+	"dain")
+		port_num=8892
+		;;
+esac
+		printf "c.ServerApp.port = $port_num\n" 	>>	~/.jupyter/jupyter_lab_config.py
+		echo "======================================================================"
+		echo " User [$USER]'s jupyter port is assigned as [$port_num]"
+		echo "======================================================================"
+		echo "    Please follow the guides for putty configurations"
+		echo "______________________________________________________________________"
+		echo "    1. PuTTY Configuration > Connection > SSH > Tunnels"
+		echo "    2. Source port: $port_num"
+		echo "    3. Destination: localhost:$port_num"
 
 # ----------------------------------------------
 # [Jupyter Qt Console for Vim User - Optional]
