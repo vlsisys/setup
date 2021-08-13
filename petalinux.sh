@@ -10,6 +10,7 @@ if [ `whoami` == "root" ]; then
 	sudo dpkg --add-architecture i386
 	sudo apt-get -y update
 	sudo apt-get -y install zlib1g:i386 net-tools xterm autoconf libtool texinfo gcc-multilib gawk
+	sudo apt-get -y install libncurses5-dev libncursesw5-dev
 
 	# ----------------------------------------------
 	# [TFTP Setting]
