@@ -68,14 +68,14 @@ esac
 # ----------------------------------------------
 # [Jupyter Qt Console for Vim User - Optional]
 # ----------------------------------------------
-echo "======================================================================\n"
-echo " Jupyter Qt Console for Vim User - Optional'\n"
-echo "======================================================================\n"
-jupyter qtconsole --generate-config
-printf "\nc.ConsoleWidget.include_other_output = True\n" >> ~/.jupyter/jupyter_qtconsole_config.py
-
-echo " For vim user, the following command can be used\n"
-echo "  $ jupyter qtconsole &\n"
-echo "  $ g <your_code>.py\n"
-echo "  @vim JupyterConnect\n"
-echo "  @vim JupyterRunFile\n"
+#echo "======================================================================\n"
+#echo " Jupyter Qt Console for Vim User - Optional'\n"
+#echo "======================================================================\n"
+#jupyter qtconsole --generate-config
+#printf "\nc.ConsoleWidget.include_other_output = True\n" >> ~/.jupyter/jupyter_qtconsole_config.py
+#
+#echo " For vim user, the following command can be used\n"
+#echo "  $ jupyter qtconsole &\n"
+#echo "  $ g <your_code>.py\n"
+#echo "  @vim JupyterConnect\n"
+#echo "  @vim JupyterRunFile\n"
