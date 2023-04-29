@@ -10,7 +10,6 @@ if [ `whoami` == "root" ]; then
 	sudo apt-get -y upgrade
 	
 	sudo apt-get -y install build-essential
-	sudo apt-get -y install samba openssh-server
 	sudo apt-get -y install vim-gtk3
 	sudo apt-get -y install x11-apps dbus-x11
 	sudo apt-get -y install gnome-terminal
@@ -22,13 +21,10 @@ if [ `whoami` == "root" ]; then
 	# [Python]
 	# ----------------------------------------------
 	sudo pip3 install --upgrade pip launchpadlib setuptools
-	sudo pip3 install numpy pandas scipy matplotlib pillow pypi progress idx2numpy xlrd
+	sudo pip3 install numpy pandas scipy matplotlib pillow pypi progress idx2numpy xlrd sympy
 	sudo pip3 install jupyter jupyterlab
 	sudo pip3 install mkdocs
 
-	# for jupyter qtconsole
-	sudo pip3 install PySide2
-	
 	# ----------------------------------------------
 	# [Bash Environment Setup]
 	# ----------------------------------------------
@@ -52,27 +48,6 @@ if [ `whoami` == "root" ]; then
 	printf "\tX11Forwarding yes\n"		>> /etc/ssh/sshd_config
 	printf "\tPermitRootLogin yes\n"	>> /etc/ssh/sshd_config
 	
-	# ----------------------------------------------
-	# [Samba]
-	# ----------------------------------------------
-	mkdir -p /vlsisys-samba
-	chmod 777 /vlsisys-samba
-	sudo ufw allow samba
-   
-	printf "\n"							>> /etc/samba/smb.conf
-	printf "[vlsisys-samba]\n"			>> /etc/samba/smb.conf
-	printf "\tcomment = vlsisys-samba\n">> /etc/samba/smb.conf
-	printf "\tbrowseable = yes\n"		>> /etc/samba/smb.conf
-	printf "\tpath = /vlsisys-samba\n"	>> /etc/samba/smb.conf
-	printf "\tguest ok = yes\n"			>> /etc/samba/smb.conf
-	printf "\tread only = no\n"			>> /etc/samba/smb.conf
-	
-	# ----------------------------------------------
-	# [Ubuntu Driver Install]
-	# ----------------------------------------------
-	sudo ubuntu-drivers autoinstall
-	sudo reboot
-
 else
 	echo "======================================================================\n"
 	echo " This script is permitted for root account!!!\n"
