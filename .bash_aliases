@@ -6,7 +6,7 @@ export	PS1="[\[\e[0;36m\]\u - \[\e[0;37m\]\D{%Y.%m.%d} \t\[\e[0;39m\]]\n\[\e[0;3
 
 alias	src='source ~/.bashrc'
 #alias	g='gvim -p > /dev/null'
-alias	g='nvim'
+alias	g='vim'
 alias	t='gnome-terminal --disable-factory&'
 alias	ju='jupyter-lab --no-browser --ServerApp.root_dir=~/project'
 alias	gitpush='git add .; git commit -m 'comment'; git push -u origin +master;'
