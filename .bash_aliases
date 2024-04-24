@@ -9,7 +9,7 @@ alias	src='source ~/.bashrc'
 alias	g='nvim'
 alias	t='gnome-terminal --disable-factory&'
 alias	ju='jupyter-lab --no-browser --ServerApp.root_dir=~/project'
-alias	gitpush='git add .; git commit -m 'comment'; git push -u origin master;'
+alias	gitpush='git add .; git commit -m 'comment'; git push -u origin +master;'
 alias	ipy2py='jupyter nbconvert --to python $1'
 
 function	cd	{ if (( $#==0 )); then builtin cd ~ && ls; else builtin cd "$@" && ls; fi }
