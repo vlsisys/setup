@@ -1,29 +1,66 @@
 ""==================================================
-"" Bundle Setup
+"" Runtime Path for Plug-Ins
 ""==================================================
-set		rtp+=~/.vim/bundle/gruvbox
-set		rtp+=~/.vim/bundle/nerdtree
-set		rtp+=~/.vim/bundle/tagbar
-set		rtp+=~/.vim/bundle/fzf
-set		rtp+=~/.vim/bundle/vim-wiki
-set		rtp+=~/.vim/bundle/vim-autoread
-set		rtp+=~/.vim/bundle/vim-airline
-set		rtp+=~/.vim/bundle/vim-indent-guides
-set		rtp+=~/.vim/bundle/vim-floaterm
+set	rtp+=~/.vim/pack/plugins/start/fzf
+set	rtp+=~/.vim/pack/plugins/start/tagbar
+set	rtp+=~/.vim/pack/plugins/start/tabular
+set	rtp+=~/.vim/pack/plugins/start/gruvbox
+set	rtp+=~/.vim/pack/plugins/start/ctrlp.vim
+set	rtp+=~/.vim/pack/plugins/start/nerdtree
+set	rtp+=~/.vim/pack/plugins/start/syntastic
+set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
+set	rtp+=~/.vim/pack/plugins/start/vim-wiki
+set	rtp+=~/.vim/pack/plugins/start/vim-airline
+set	rtp+=~/.vim/pack/plugins/start/vim-autoread
+set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
+set	rtp+=~/.vim/pack/plugins/start/vim-surround
+set	rtp+=~/.vim/pack/plugins/start/vim-diminactive
+set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
+set	rtp+=~/.vim/pack/plugins/start/vim-verilog-instance
 
-source	~/.vim/bundle/gruvbox/autoload/gruvbox.vim
-source	~/.vim/bundle/nerdtree/plugin/NERD_tree.vim
-source	~/.vim/bundle/tagbar/plugin/tagbar.vim
-source	~/.vim/bundle/fzf/plugin/fzf.vim
-source	~/.vim/bundle/vim-wiki/plugin/vimwiki.vim
-source	~/.vim/bundle/vim-autoread/plugin/autoread.vim
-source	~/.vim/bundle/vim-airline/plugin/airline.vim
-source	~/.vim/bundle/vim-indent-guides/plugin/indent_guides.vim
-source	~/.vim/bundle/vim-floaterm/plugin/floaterm.vim
+set	rtp+=~/.vim/pack/plugins/start/tlib_vim
+set	rtp+=~/.vim/pack/plugins/start/vim-addon-mw-utils
+set	rtp+=~/.vim/pack/plugins/start/vim-snippets
+set	rtp+=~/.vim/pack/plugins/start/vim-snipmate
+imap <C-J> <Plug>snipMateNextOrTrigger
 
-let g:NERDTreeWinSize=16
-let g:Tlist_WinWidth=32
-"=================================================
+""==================================================
+"" Bundle Configurations
+""==================================================
+" plugin:nerdtree&tagbar
+let g:NERDTreeWinSize = 18
+let g:Tlist_WinWidth  = 32
+
+" plugin:ctrlp 
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" plugin:syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list            = 1
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
+let g:syntastic_error_symbol             = 'E'
+let g:syntastic_warning_symbol           = 'W'
+let g:syntastic_loc_list_height          = 3
+let g:syntastic_verilog_checkers         = ['iverilog']
+let g:syntastic_python_checkers          = ['python']
+let g:syntastic_cpp_compiler             = 'g++'
+let g:syntastic_cpp_compiler_options     = '-std=c++14'
+
+" plugin:tabular
+let mapleader=','
+if exists(":Tabularize")
+	nmap <Leader>a= :Tabularize /=<CR>
+	vmap <Leader>a= :Tabularize /=<CR>
+	nmap <Leader>a: :Tabularize /:\zs<CR>
+	vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+
+"==================================================
 " Basic Setting
 "==================================================
 set	nocompatible
@@ -38,42 +75,39 @@ augroup END
 "==================================================
 " Map Setting
 "==================================================
-nmap ,s :source ~/.vimrc<CR>
-nmap ,v :e      ~/.vimrc<CR>
-nmap ,q :q!<CR>
+nmap ,s			: source ~/.vimrc<CR>
+nmap ,v			: e      ~/.vimrc<CR>
+nmap ,q			: q!<CR>
 
-map <F2>			:NERDTreeToggle<CR>
-map <F3>			:IndentGuidesToggle<CR>
-map <F4>			:FloatermNew<CR>
-map <F10>			:TagbarToggle<CR>
-map <F11>			:VimwikiAll2HTML<CR>
-map <F12>			:%!xxd<CR>
-map <C-LEFT>		:tabprev<CR>
-map <C-RIGHT>		:tabnext<CR>
-map <C-n>			:tabnew<CR>
+map ,n			: noh<CR>
+map ,aa			: Tabularize /
 
-map ,n :noh<CR>
-"map ,` :s/output/wire/<CR> :'<,'>s/input/reg\t/<CR> :'<,'>s/,/;/<CR> :noh<CR> j<S-a>; <ESC> j
-"map ,1 :s/module\s\+/\t/<CR> :'<,'>s/output\s\+/\t./<CR> :'<,'>s/input\s\+/\t./<CR> :'<,'>s/,/\t\t(\t\t),<CR> j<S-a>		(		)); <ESC> :'<,'>s/^\t\w\+/&\tu_&/<CR> :'<,'>s/u_\t/u_/<CR> :noh <CR> 
-"map ,2 :s/module\s\+/\t/<CR> :'<,'>s/output\s\+/\t./<CR> :'<,'>s/input\s\+/\t./<CR> :'<,'>s/\.\w\+/&\t\t(&\t\t)<CR> <S-a>); <ESC> :'<,'>s/^\t\w\+/&\tu_&/<CR> :'<,'>s/u_\t/u_/<CR> :'<,'>s/(\./(/<CR> :noh <CR> 
-map	,1	<ESC> :call VerilogInstance()<CR> 
+map <F2>		: NERDTreeToggle<CR>
+map <F3>		: IndentGuidesToggle<CR>
+map <F4>		: FloatermNew<CR>
+map <F10>		: TagbarToggle<CR>
+map <F11>		: VimwikiAll2HTML<CR>
+map <F12>		: %!xxd<CR>
+map <C-LEFT>	: tabprev<CR>
+map <C-RIGHT>	: tabnext<CR>
+map <C-n>		: tabnew<CR>
 
-map ,q i	always @(posedge i_clk or negedge i_rstn) begin <CR><CR>end <ESC>
+"inoremap { {}<Esc>ha
+"inoremap ( ()<Esc>ha
+"inoremap [ []<Esc>ha
+"inoremap " ""<Esc>ha
+"inoremap ' ''<Esc>ha
+"inoremap ` ``<Esc>ha
 
-inoremap { {}<Esc>ha
-inoremap ( ()<Esc>ha
-inoremap [ []<Esc>ha
-inoremap " ""<Esc>ha
-inoremap ' ''<Esc>ha
-inoremap ` ``<Esc>ha
 "==================================================
 " Visual Setting
 "==================================================
 colorscheme gruvbox
 syntax  on
 "set guifont=Sudo:h13
-"set guifont=Jetbrains\ Mono:h10
-set guifont=Victor\ Mono:h10
+""set guifont=Jetbrains\ Mono:h10
+""set guifont=Iosevka:h10
+set guifont=Victor\ Mono:h11
 set linespace=4
 set nocursorcolumn
 set nocursorline
@@ -82,13 +116,10 @@ set incsearch
 set lazyredraw
 set linebreak
 set nolist
-"set list listchars=tab:??\ ,trail:??
 set mouse=a
 set mousehide
 set number
 set numberwidth=6
-"set pumheight=x
-"set rightleft
 set ruler
 "set scroll=10
 set shiftwidth=4
@@ -117,23 +148,15 @@ set noexpandtab
 set mps+=<:>
 set	wildmenu
 
-"set nf=alpha,octal,hex,bin
-"set omnifunc=syntaxcomplete#Complete
-"set operatorfunc
-"set statusline
-"set tabline
-
 "==================================================
 " Environment
 "==================================================
-set noautochdir
+set autochdir
 set autoread
 set background=dark
 "set background=light
 set backspace=indent,eol,start
-set nocompatible
 set confirm
-"set dict=D:\Utils\Configurations\_vimdic
 set hlsearch
 set history=100
 "set ignorecase
@@ -152,17 +175,13 @@ iabbr	<expr>	__branch	system("git rev-parse --abbrev-ref HEAD")
 iabbr	<expr>	__tcsh		system("which tcsh")
 
 iabbr			__email		woongchoi@sm.ac.kr
-iabbr			__always	always @(posedge i_clk) begin
-iabbr			__else		else begin<CR>end
-iabbr			__elif		else if () begin<CR>end
-iabbr			__for		for(i=0;i<xx;i=i+1) begin
-
 "==================================================
 " Additional
 "==================================================
 filetype on
 filetype indent on
 filetype plugin on
+"set paste
 
 au BufNewFile,BufReadPost Makefile set noexpandtab
 au BufNewFile,BufRead *_vim* setf vim
@@ -180,104 +199,6 @@ au BufReadPost *
 "==================================================
 " Functions
 "==================================================
-function! VerilogInstance()
-	let	l:paramDict		= {}
-	let	l:portDict		= {}
-	let	l:paramList		= []
-	let	l:portList		= []
-	let	l:portLineList	= []
-	if(exists(getreg('+')))
-		let	l:lineList	= split(getreg('+'), "\n")
-	else
-		let	l:lineList	= split(getreg('0'), "\n")
-	endif
-	let	l:maxStrLen	= 0
-	for	l:line in l:lineList
-		if(matchstr(l:line, "module") != "")
-			let	l:moduleName	= split(l:line)[1]
-			let	l:moduleName	= substitute(l:moduleName, '#', '', '')
-			let	l:moduleName	= substitute(l:moduleName, '(', '', '')
-		endif
-		if(matchstr(l:line, "parameter") != "")
-			let l:aParam	= split(l:line)[1]
-			let l:aValue	= split(l:line)[3]
-			let	l:aValue	= substitute(l:aValue, ',', '', '')
-			let	l:paramDict[l:aParam]	= l:aValue
-			let	l:paramList	= add(l:paramList, l:aParam)
-			if(l:maxStrLen < len(l:aParam))
-				let l:maxStrLen	= len(l:aParam)
-			endif
-		endif
-		if(matchstr(l:line, "input") != "" || matchstr(l:line, "output") != "" || matchstr(l:line, "inout") != "")
-			let l:portName	= split(l:line)[-1]
-			let	l:portName	= substitute(l:portName, ',', '', '')
-			let	l:portList	= add(l:portList, l:portName)
-			let l:portType	= split(l:line)[0]
-			let	l:portLineList	= add(l:portLineList, l:line)
-			if(stridx(l:line, "[") != -1)
-				let l:portIdxL	= str2nr(l:line[stridx(l:line,"[")+1:stridx(l:line,":")-1])
-				let l:portIdxR	= str2nr(l:line[stridx(l:line,":")+1:stridx(l:line,"]")-1])
-				let	l:portBits	= abs(l:portIdxL-l:portIdxR) + 1
-			else
-				let	l:portBits	= 1
-			endif
-			let	l:portDict[l:portName]	= [l:portType, l:portBits]
-			if(l:maxStrLen < len(l:portName))
-				let l:maxStrLen	= len(l:portName)
-			endif
-		endif
-	endfor
-
-	let	l:maxTapNum = max([4, float2nr(ceil(l:maxStrLen/4.0))])
-
-	let	l:lines = ""
-
-	for	l:aLine in l:portLineList
-		let	l:aLineOrig	= l:aLine
-		let	l:aLine	= substitute(l:aLine, '\s\+output\s\+reg', 'wire', '')
-		let	l:aLine	= substitute(l:aLine, '\s\+output', 'wire', '')
-		let	l:aLine	= substitute(l:aLine, '\s\+inout', 'reg', '')
-		let	l:aLine	= substitute(l:aLine, '\s\+input', 'reg', '')
-		let	l:aLine	= substitute(l:aLine, ',', ';', '')
-   		if(l:aLineOrig != l:portLineList[-1])
-			let	l:lines = l:lines . printf("%s\n", l:aLine)
-		else
-			let	l:lines = l:lines . printf("%s;\n\n", l:aLine)
-		endif
-	endfor
-
-	let	l:lines = l:lines . printf("%s", l:moduleName)
-	if(len(l:paramList))
-		let	l:lines = l:lines . printf("#(\n")
-		for	l:aKey in l:paramList
-			let	l:keyTabNum	= float2nr(ceil(len(".".l:aKey)/4.0))
-			let	l:valTabNum	= float2nr(ceil(len(".".l:paramDict[l:aKey])/4.0))
-			let	l:keyTabStr	= repeat("\t", l:maxTapNum - l:keyTabNum + 1)
-			let	l:valTabStr	= repeat("\t", l:maxTapNum - l:valTabNum + 1)
-			if(l:aKey != l:paramList[-1])
-				let	l:lines = l:lines . printf(".%s%s(%s%s),\n", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
-			else
-				let	l:lines = l:lines . printf(".%s%s(%s%s))\n", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
-			endif
-		endfor
-		let	l:lines = l:lines . printf("\bu_%s(\n", l:moduleName)
-	else
-		let	l:lines = l:lines . printf("\tu_%s(\n", l:moduleName)
-	endif
-
-	for	l:portName in l:portList
-		let	l:tabNum	= float2nr(ceil(len(".".l:portName)/4.0))
-		let	l:tabStr	= repeat("\t", l:maxTapNum - l:tabNum + 1)
-		if(l:portName != l:portList[-1])
-			let	l:lines = l:lines . printf(".%s%s(%s%s),\t//%s-bit\n" , l:portName, l:tabStr, l:portName, l:tabStr, l:portDict[l:portName][1])
-		else
-			let	l:lines = l:lines . printf(".%s%s(%s%s));\t//%s-bit\n", l:portName, l:tabStr, l:portName, l:tabStr, l:portDict[l:portName][1])
-		endif
-	endfor
-
-	exe	printf(":.normal o%s", l:lines)
-endfunction
-
 function! FontSizePlus ()
     let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
     let l:gf_size_whole = l:gf_size_whole + 1
