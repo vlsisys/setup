@@ -1,7 +1,7 @@
 #!/bin/bash
-## ----------------------------------------------
-## [Prerequisites]
-## ----------------------------------------------
+# ----------------------------------------------
+# [Prerequisites]
+# ----------------------------------------------
 #sudo apt-get -y install verilator
 #sudo apt-get -y install git help2man perl python3 make autoconf g++ flex bison ccache
 #sudo apt-get -y install libgoogle-perftools-dev numactl perl-doc
@@ -12,17 +12,18 @@
 #sudo apt-get -y install mold
 #sudo apt-get -y install libgoogle-perftools-dev numactl
 #sudo apt-get -y install perl-doc
-#
+
 # ----------------------------------------------
 # [SystemC]
 # ----------------------------------------------
-cd ~/utils
-wget https://github.com/accellera-official/systemc/archive/refs/tags/3.0.0.tar.gz
-tar -zxvf 3.0.0.tar.gz
+#cd ~/utils
+#wget https://github.com/accellera-official/systemc/archive/refs/tags/3.0.0.tar.gz
+#tar -zxvf 3.0.0.tar.gz
 
 # ----------------------------------------------
 # [Verilator]
 # ----------------------------------------------
+cd ~/utils
 git clone https://github.com/verilator/verilator
 unset VERILATOR_ROOT
 cd verilator
