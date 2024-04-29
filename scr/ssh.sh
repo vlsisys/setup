@@ -3,10 +3,8 @@
 # ----------------------------------------------
 # [SSH]
 # ----------------------------------------------
-sudo echo "\n"				>> /etc/ssh/ssh_config
-sudo echo "\tForwardX11 yes\n"		>> /etc/ssh/ssh_config
-sudo echo "\tForwardX11Trusted yes\n"	>> /etc/ssh/ssh_config
-sudo echo
-sudo echo "\n"							>> /etc/ssh/sshd_config
-sudo echo "\tX11Forwarding yes\n"		>> /etc/ssh/sshd_config
-sudo echo "\tPermitRootLogin yes\n"	>> /etc/ssh/sshd_config
+echo "ForwardX11 yes"			| sudo tee -a /etc/ssh/ssh_config
+echo "ForwardX11Trusted yes"	| sudo tee -a /etc/ssh/ssh_config
+
+echo "X11Forwarding yes"		| sudo tee -a /etc/ssh/sshd_config
+echo "PermitRootLogin yes"		| sudo tee -a /etc/ssh/sshd_config
