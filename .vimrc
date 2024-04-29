@@ -104,10 +104,9 @@ map <C-n>		: tabnew<CR>
 "==================================================
 colorscheme gruvbox
 syntax  on
-"set guifont=Sudo:h13
-""set guifont=Jetbrains\ Mono:h10
-""set guifont=Iosevka:h10
-set guifont=Victor\ Mono:h11
+"set guifont=Sudo\ 18
+""set guifont=Jetbrains\ Mono\ 16
+set guifont=Victor\ Mono\ 16
 set linespace=4
 set nocursorcolumn
 set nocursorline
