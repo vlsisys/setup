@@ -119,8 +119,15 @@ snippet	md
 snippet dump
 	initial begin
 		if (\$value$plusargs("vcd_file=%s", vcd_file)) begin
-			\$display("vcd_file=%x", vcd_file);
 			\$dumpfile(vcd_file);
 			\$dumpvars;
 		end
 	end
+snippet utils
+	task dispAsFixedPoint;
+		input reg	[127:0]					sDescription;
+		input		[\`DEF_BIT_FULL-1:0]	bIn;
+		begin
+			\$display("[\%0s] Binary: \%b > Fixed Point Number: \%f", sDescription, bIn, bIn*(2.0**-(\`DEF_BIT_FRAC)));
+		end
+	endtask

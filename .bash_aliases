@@ -29,8 +29,8 @@ function	ivg(){
 	echo ' icarus verilog for' [${1}]
 	echo '======================================================================'
 	mkdir -p vcd
-	iverilog -o $1.vvp $1_tb.v
-	vvp	$1.vvp +vcd_file=$1.vcd
+	iverilog -o $1.vvp timescale.v $1_tb.v
+	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
 	rm $1.vvp
 	gtkwave ./vcd/$1.vcd &
 }
@@ -40,7 +40,7 @@ function	iv(){
 	echo ' icarus verilog for' [${1}]
 	echo '======================================================================'
 	mkdir -p vcd
-	iverilog -o $1.vvp $1_tb.v
+	iverilog -o $1.vvp timescale.v $1_tb.v
 	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
 	rm $1.vvp
 }
