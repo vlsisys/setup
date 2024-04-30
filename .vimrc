@@ -16,7 +16,6 @@ set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
 set	rtp+=~/.vim/pack/plugins/start/vim-surround
 set	rtp+=~/.vim/pack/plugins/start/vim-diminactive
 set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
-set	rtp+=~/.vim/pack/plugins/start/vim-verilog-instance
 
 set	rtp+=~/.vim/pack/plugins/start/tlib_vim
 set	rtp+=~/.vim/pack/plugins/start/vim-addon-mw-utils
@@ -75,10 +74,12 @@ augroup END
 "==================================================
 " Map Setting
 "==================================================
-nmap ,s			: source ~/.vimrc<CR>
+nmap ,s			: source ~/.vimrc<CR> <ESC> :noh<CR>
 nmap ,v			: e      ~/.vimrc<CR>
 nmap ,b			: e      ~/.bash_aliases<CR>
+nmap ,1			: e      ~/.vim/pack/plugins/start/vim-snippets/snippets/verilog.snippets<CR>
 nmap ,q			: q!<CR>
+nmap ,w			: w<CR>
 
 map ,n			: noh<CR>
 map ,aa			: Tabularize /
@@ -94,7 +95,6 @@ map <C-LEFT>	: tabprev<CR>
 map <C-RIGHT>	: tabnext<CR>
 map <C-n>		: tabnew<CR>
 
-
 "inoremap { {}<Esc>ha
 "inoremap ( ()<Esc>ha
 "inoremap [ []<Esc>ha
@@ -109,7 +109,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 ""set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 16
+set guifont=Victor\ Mono\ 13
 set linespace=4
 set nocursorcolumn
 set nocursorline

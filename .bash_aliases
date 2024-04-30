@@ -2,7 +2,7 @@
 # [Prompt & Env. Variables]
 # ----------------------------------------------
 export	PS1="[\[\e[0;36m\]\u - \[\e[0;37m\]\D{%Y.%m.%d} \t\[\e[0;39m\]]\n\[\e[0;31m\]\${PWD}: \[\e[0;39m\]"
-# export	DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export	DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 #source	/opt/pkg/petalinux-v2021.1/settings.sh
 #source	/tools/Xilinx/Vivado/2020.2/settings64.sh
 

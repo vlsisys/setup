@@ -110,42 +110,67 @@ snippet	!mod
 		output reg				o_valid,
 		input		[ 31:0]		i_in,
 		input					i_clk,
-		input					i_rst
+		input					i_rstn
 	);
 
 	endmodule
+
+# Test Bench Template
 
 snippet	tb
 	// --------------------------------------------------
 	//	Define Global Variables
 	// --------------------------------------------------
 	//	Clock
-	\`define	CLKFREQ		100					// Unit: MHz
-	\`define	SIMCYCLE	100
+	\`define	CLKFREQ		100		// Unit: MHz
+	\`define	SIMCYCLE	10
 	//	Multibit
 	\`define NBIT		8
 	//	Fixed-Point Number
-	\`define NBIT_I		8					// Integer Part
-	\`define NBIT_F		8					// Fractional Part
+	\`define NBIT_I		8		// Integer Part
+	\`define NBIT_F		8		// Fractional Part
 	\`define NBIT_T		\`NBIT_I+\`NBIT_F
 
 	\`include	"${0:`vim_snippets#Filename('$1', 'name')`}.v"
+
 	module	${1:`vim_snippets#Filename('$1', 'name')`};
 	// --------------------------------------------------
-	//	Instanciation
+	//	DUT Signals & Instantiate
 	// --------------------------------------------------
 
 	// --------------------------------------------------
 	//	Clock
 	// --------------------------------------------------
-		initial					i_clk	= 1'b1   ;
-		always	#(500/\`CLKFREQ)	i_clk	= ~i_clk ;
+		forever	#(500/\`CLKFREQ)	i_clk = ~i_clk;
 
 	// --------------------------------------------------
-	//	Test Bench
+	//	Tasks
 	// --------------------------------------------------
-		integer		i, j;
+		task resetReleaseAfterNCycles;
+			input	[  9:0]		n;
+			begin
+				#(n*1000/\`CLKFREQ);
+				i_rstn <= 1'b1;
+			end
+		endtask
+
+		task assignRandom;
+			input	[  9:0]		max;
+			input	[n-1:0]		k;
+			begin
+				#(k*1000/\`CLKFREQ);
+				rstn_name	<= 1'b1;
+			end
+		endtask
+
+	// --------------------------------------------------
+	//	Test Stimulus
+	// --------------------------------------------------
+		integer		i, j, k, n;
 		initial begin
+			init();
+			resetReleaseAfterNCycles(10);
+
 			for (i=0; i<\`SIMCYCLE; i++) begin
 			end
 			\$finish;
@@ -153,14 +178,17 @@ snippet	tb
 
 	endmodule
 
+# Dump VCD
 snippet dump
 	reg	[8*32-1:0]	vcd_file;
 	initial begin
-		if (\$value$plusargs("vcd_file=%s", vcd_file)) begin
+		if (\$value\$plusargs("vcd_file=%s", vcd_file)) begin
 			\$dumpfile(vcd_file);
 			\$dumpvars;
 		end
 	end
+
+# Tasks
 snippet utils
 	task dispAsFixedPoint;
 		input reg	[127:0]					sDescription;
