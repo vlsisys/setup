@@ -116,3 +116,11 @@ snippet	md
 	);
 
 	endmodule
+snippet dump
+	initial begin
+		if (\$value$plusargs("vcd_file=%s", vcd_file)) begin
+			\$display("vcd_file=%x", vcd_file);
+			\$dumpfile(vcd_file);
+			\$dumpvars;
+		end
+	end
