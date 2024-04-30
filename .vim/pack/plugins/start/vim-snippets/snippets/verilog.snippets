@@ -98,25 +98,63 @@ snippet tde
 		${3:REG = 16'h0000}
 	} ${1:my_dest_t};
 # Module 
-snippet	md
-	module	${0:module_name}
-	#(	parameter	PARAM0	= 0,
+snippet	!mod
+	module	${0:`vim_snippets#Filename('$1', 'name')`}
+	#(	
+		parameter	PARAM0	= 0,
 		parameter	PARAM1	= 1,
 		parameter	PARAM2	= 2
 	)
-	(
-		//	Outputs
-		output	reg		[ 31:0]		o_dout,
-		output	reg					o_valid,
-
-		//	Inputs
-		input	wire	[ 31:0]		i_din,
-		input	wire				i_clk,
-		input	wire				i_rst
+	(	
+		output reg	[ 31:0]		o_out,
+		output reg				o_valid,
+		input		[ 31:0]		i_in,
+		input					i_clk,
+		input					i_rst
 	);
 
 	endmodule
+
+snippet	tb
+	// --------------------------------------------------
+	//	Define Global Variables
+	// --------------------------------------------------
+	//	Clock
+	\`define	CLKFREQ		100					// Unit: MHz
+	\`define	SIMCYCLE	100
+	//	Multibit
+	\`define NBIT		8
+	//	Fixed-Point Number
+	\`define NBIT_I		8					// Integer Part
+	\`define NBIT_F		8					// Fractional Part
+	\`define NBIT_T		\`NBIT_I+\`NBIT_F
+
+	\`include	"${0:`vim_snippets#Filename('$1', 'name')`}.v"
+	module	${1:`vim_snippets#Filename('$1', 'name')`};
+	// --------------------------------------------------
+	//	Instanciation
+	// --------------------------------------------------
+
+	// --------------------------------------------------
+	//	Clock
+	// --------------------------------------------------
+		initial					i_clk	= 1'b1   ;
+		always	#(500/\`CLKFREQ)	i_clk	= ~i_clk ;
+
+	// --------------------------------------------------
+	//	Test Bench
+	// --------------------------------------------------
+		integer		i, j;
+		initial begin
+			for (i=0; i<\`SIMCYCLE; i++) begin
+			end
+			\$finish;
+		end
+
+	endmodule
+
 snippet dump
+	reg	[8*32-1:0]	vcd_file;
 	initial begin
 		if (\$value$plusargs("vcd_file=%s", vcd_file)) begin
 			\$dumpfile(vcd_file);
