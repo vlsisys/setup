@@ -98,7 +98,7 @@ snippet tde
 		${3:REG = 16'h0000}
 	} ${1:my_dest_t};
 # Module 
-snippet	!mod
+snippet	md
 	module	${0:`vim_snippets#Filename('$1', 'name')`}
 	#(	
 		parameter	PARAM0	= 0,
@@ -121,19 +121,16 @@ snippet	tb
 	// --------------------------------------------------
 	//	Define Global Variables
 	// --------------------------------------------------
-	//	Clock
-	\`define	CLKFREQ		100		// Unit: MHz
-	\`define	SIMCYCLE	10
-	//	Multibit
-	\`define NBIT		8
-	//	Fixed-Point Number
+	\`define	CLKFREQ		100		// Clock Freq. (Unit: MHz)
+	\`define	SIMCYCLE	10		// Sim. Cycles
+	\`define NBIT		16		// Total BitWidth
 	\`define NBIT_I		8		// Integer Part
 	\`define NBIT_F		8		// Fractional Part
 	\`define NBIT_T		\`NBIT_I+\`NBIT_F
 
-	\`include	"${0:`vim_snippets#Filename('$1', 'name')`}.v"
+	\`include	"${3:`vim_snippets#Filename('$1', 'name')`}.v"
 
-	module	${1:`vim_snippets#Filename('$1', 'name')`};
+	module	${2:`vim_snippets#Filename('$1', 'name')`};
 	// --------------------------------------------------
 	//	DUT Signals & Instantiate
 	// --------------------------------------------------
@@ -172,8 +169,24 @@ snippet	tb
 			resetReleaseAfterNCycles(10);
 
 			for (i=0; i<\`SIMCYCLE; i++) begin
+				
 			end
 			\$finish;
+		end
+
+	// --------------------------------------------------
+	//	Dump VCD
+	// --------------------------------------------------
+		reg	[8*32-1:0]	vcd_file;
+		initial begin
+			if (\$value\$plusargs("vcd_file=%s", vcd_file)) begin
+				\$dumpfile(vcd_file);
+				\$dumpvars;
+			end else begin
+				\$dumpfile("${1:`vim_snippets#Filename('$1', 'name')`}.vcd");
+				\$dumpvars;
+			end
+
 		end
 
 	endmodule
@@ -197,3 +210,18 @@ snippet utils
 			\$display("[\%0s] Binary: \%b > Fixed Point Number: \%f", sDescription, bIn, bIn*(2.0**-(\`DEF_BIT_FRAC)));
 		end
 	endtask
+
+# Header Comment Template
+snippet co
+	// ==================================================
+	//	[ VLSISYS Lab. ]
+	//	* Filename		: ${4:`vim_snippets#Filename('$1', 'name')`}.v
+	//	* Author		: Woong Choi (woongchoi@sm.ac.kr)
+	//	* Description	: ${3}
+	//		- Key Points
+	//			1. ${2}
+	//			2. ${1}
+	// ==================================================
+
+
+# Next...

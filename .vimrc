@@ -111,8 +111,8 @@ syntax  on
 "set guifont=Sudo\ 18
 ""set guifont=Jetbrains\ Mono\ 16
 set guifont=Victor\ Mono\ 11
-set lines=32
-set columns=100
+"set lines=32
+"set columns=100
 set linespace=4
 set nocursorcolumn
 set nocursorline
@@ -295,7 +295,6 @@ function! VInstance()
 			let	l:moduleName	= split(l:line)[1]
 			let	l:moduleName	= substitute(l:moduleName, '#', '', '')
 			let	l:moduleName	= substitute(l:moduleName, '(', '', '')
-			echo l:moduleName
 		endif
 		if(matchstr(l:line, "parameter") != "")
 			let l:aParam	= split(l:line)[1]
@@ -329,7 +328,7 @@ function! VInstance()
 
 	let	l:maxTapNum = max([4, float2nr(ceil(l:maxStrLen/4.0))])
 
-	let	l:lines = ""
+	let	l:lines = "\t"
 
 	for	l:aLine in l:portLineList
 		let	l:aLineOrig	= l:aLine
@@ -345,7 +344,7 @@ function! VInstance()
 		endif
 	endfor
 
-	let	l:lines = l:lines . printf("%s", l:moduleName)
+	let	l:lines = l:lines . printf("%s\r", l:moduleName)
 	if(len(l:paramList))
 		let	l:lines = l:lines . printf("#(\r")
 		for	l:aKey in l:paramList
@@ -356,21 +355,21 @@ function! VInstance()
 			if(l:aKey != l:paramList[-1])
 				let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
 			else
-				let	l:lines = l:lines . printf(".%s%s(%s%s))\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
+				let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
 			endif
 		endfor
-		let	l:lines = l:lines . printf("\bu_%s(\r", l:moduleName)
+		let	l:lines = l:lines . printf("u_%s(\r", l:moduleName)
 	else
-		let	l:lines = l:lines . printf("\tu_%s(\r", l:moduleName)
+		let	l:lines = l:lines . printf("u_%s(\r", l:moduleName)
 	endif
 
 	for	l:portName in l:portList
 		let	l:tabNum	= float2nr(ceil(len(".".l:portName)/4.0))
 		let	l:tabStr	= repeat("\t", l:maxTapNum - l:tabNum + 1)
 		if(l:portName != l:portList[-1])
-			let	l:lines = l:lines . printf(".%s%s(%s%s),\t//%s-bit\r" , l:portName, l:tabStr, l:portName, l:tabStr, l:portDict[l:portName][1])
+			let	l:lines = l:lines . printf(".%s%s(%s%s),\r" , l:portName, l:tabStr, l:portName, l:tabStr)
 		else
-			let	l:lines = l:lines . printf(".%s%s(%s%s));\t//%s-bit\r", l:portName, l:tabStr, l:portName, l:tabStr, l:portDict[l:portName][1])
+			let	l:lines = l:lines . printf(".%s%s(%s%s)\r);", l:portName, l:tabStr, l:portName, l:tabStr)
 		endif
 	endfor
 
