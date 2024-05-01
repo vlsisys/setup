@@ -78,8 +78,9 @@ nmap ,s			: source ~/.vimrc<CR> <ESC> :noh<CR>
 nmap ,v			: e      ~/.vimrc<CR>
 nmap ,b			: e      ~/.bash_aliases<CR>
 nmap ,1			: e      ~/.vim/pack/plugins/start/vim-snippets/snippets/verilog.snippets<CR>
-nmap ,q			: q!<CR>
+nmap ,q			: q<CR>
 nmap ,w			: w<CR>
+nmap ,rm		: %s///g<CR>
 
 map ,n			: noh<CR>
 map ,aa			: Tabularize /
@@ -109,7 +110,9 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 ""set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 13
+set guifont=Victor\ Mono\ 11
+set lines=32
+set columns=100
 set linespace=4
 set nocursorcolumn
 set nocursorline
