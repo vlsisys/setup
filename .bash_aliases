@@ -32,7 +32,7 @@ function	ivg(){
 	iverilog -o $1.vvp timescale.v $1_tb.v
 	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
 	rm $1.vvp
-	gtkwave ./vcd/$1.vcd &
+	gtkwave -f ./vcd/$1.vcd -T test.tcl &
 }
 
 function	iv(){

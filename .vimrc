@@ -284,11 +284,15 @@ function! VInstance()
 	let	l:paramList		= []
 	let	l:portList		= []
 	let	l:portLineList	= []
+	
+	" Read Buffer
 	if(exists(getreg('+')))
 		let	l:lineList	= split(getreg('+'), "\n")
 	else
 		let	l:lineList	= split(getreg('0'), "\n")
 	endif
+
+	" Preprocessing
 	let	l:maxStrLen	= 0
 	for	l:line in l:lineList
 		if(matchstr(l:line, "module") != "")
@@ -326,10 +330,9 @@ function! VInstance()
 		endif
 	endfor
 
+	" Signals for Testbench
 	let	l:maxTapNum = max([4, float2nr(ceil(l:maxStrLen/4.0))])
-
 	let	l:lines = "\t"
-
 	for	l:aLine in l:portLineList
 		let	l:aLineOrig	= l:aLine
 		let	l:aLine	= substitute(l:aLine, '\s\+output\s\+reg', 'wire', '')
@@ -344,6 +347,7 @@ function! VInstance()
 		endif
 	endfor
 
+	" Port Mapping
 	let	l:lines = l:lines . printf("%s\r", l:moduleName)
 	if(len(l:paramList))
 		let	l:lines = l:lines . printf("#(\r")
@@ -369,9 +373,22 @@ function! VInstance()
 		if(l:portName != l:portList[-1])
 			let	l:lines = l:lines . printf(".%s%s(%s%s),\r" , l:portName, l:tabStr, l:portName, l:tabStr)
 		else
-			let	l:lines = l:lines . printf(".%s%s(%s%s)\r);", l:portName, l:tabStr, l:portName, l:tabStr)
+			let	l:lines = l:lines . printf(".%s%s(%s%s)\r);\r", l:portName, l:tabStr, l:portName, l:tabStr)
 		endif
 	endfor
+
+	" Initialization Task
+	let	l:lines = l:lines . printf("task init;\r")
+	let	l:lines = l:lines . printf("begin\r")
+	for	l:aLine in l:portLineList
+		if(matchstr(l:aLine, "input") != "")
+			let l:portName	= split(l:aLine)[-1]
+			let	l:portName	= substitute(l:portName, ',', '', '')
+			let	l:lines = l:lines . printf("%s\t= 0;\r", l:portName)
+		endif
+	endfor
+	let	l:lines = l:lines . printf("end\r")
+	let	l:lines = l:lines . printf("endtask\r")
 
 	exe	printf(":.normal o%s", l:lines)
 
