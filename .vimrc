@@ -287,8 +287,10 @@ function! VInstance()
 	
 	" Read Buffer
 	if(exists(getreg('+')))
+		" ["+]: Specified Register
 		let	l:lineList	= split(getreg('+'), "\n")
 	else
+		" ["0]: Most Recently Yanked Register
 		let	l:lineList	= split(getreg('0'), "\n")
 	endif
 
@@ -389,6 +391,27 @@ function! VInstance()
 	endfor
 	let	l:lines = l:lines . printf("end\r")
 	let	l:lines = l:lines . printf("endtask\r")
+
+	" Make Random Input Stimulus
+	let l:inputBits	= 0
+	let l:iPortList	= [] 
+	for	l:portName in l:portList
+		let l:portType	= l:portDict[l:portName][0]
+		let l:portBits	= l:portDict[l:portName][1]
+		if(l:portType == "input")
+			let	l:paramList	= add(l:iPortList, l:portName)
+			let l:inputBits	= l:inputBits + l:portBits
+		endif
+	endfor
+
+	let	l:lines = l:lines . printf("//{")
+	for	l:portName in l:iPortList
+		if(l:portName != l:iPortList[-1])
+			let	l:lines = l:lines . printf("%s, ", l:portName)
+		else
+			let	l:lines = l:lines . printf("%s} = $urandom_range(0, 2**%s-1);", l:portName, l:inputBits)
+		endif
+	endfor
 
 	exe	printf(":.normal o%s", l:lines)
 

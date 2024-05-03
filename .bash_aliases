@@ -29,10 +29,11 @@ function	ivg(){
 	echo ' icarus verilog for' [${1}]
 	echo '======================================================================'
 	mkdir -p vcd
+	ln -fs ~/templates/verilog/timescale.v timescale.v 
 	iverilog -o $1.vvp timescale.v $1_tb.v
 	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
 	rm $1.vvp
-	gtkwave -f ./vcd/$1.vcd -T test.tcl &
+	gtkwave -f ./vcd/$1.vcd -T ~/utils/scripts/gtkwv.tcl 
 }
 
 function	iv(){
@@ -40,6 +41,7 @@ function	iv(){
 	echo ' icarus verilog for' [${1}]
 	echo '======================================================================'
 	mkdir -p vcd
+	ln -fs ~/templates/verilog/timescale.v timescale.v 
 	iverilog -o $1.vvp timescale.v $1_tb.v
 	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
 	rm $1.vvp

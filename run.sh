@@ -2,8 +2,8 @@
 # --------------------------------------------------
 #  Coded by Woong
 # --------------------------------------------------
-source	./scr/advanced_packaging_tools.sh
-source	./scr/ssh.sh
-source	./scr/shell.sh
-source	./scr/python.sh
-#source	./scr/verilator.sh
+source	./src/advanced_packaging_tools.sh
+source	./src/ssh.sh
+source	./src/shell.sh
+source	./src/python.sh
+#source	./src/verilator.sh
