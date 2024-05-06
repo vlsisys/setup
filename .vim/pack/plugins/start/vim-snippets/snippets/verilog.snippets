@@ -156,15 +156,6 @@ snippet	tb
 			end
 		endtask
 
-		//task assignRandom;
-		//	input	[  9:0]		max;
-		//	input	[n-1:0]		k;
-		//	begin
-		//		#(k*1000/\`CLKFREQ);
-		//		rstn_name	= 1'b1;
-		//	end
-		//endtask
-
 	// --------------------------------------------------
 	//	Test Stimulus
 	// --------------------------------------------------
@@ -211,12 +202,9 @@ snippet utils
 snippet co
 	// ==================================================
 	//	[ VLSISYS Lab. ]
-	//	* Filename		: ${4:`vim_snippets#Filename('$1', 'name')`}.v
 	//	* Author		: Woong Choi (woongchoi@sm.ac.kr)
-	//	* Description	: ${3}
-	//		- Key Points
-	//			1. ${2}
-	//			2. ${1}
+	//	* Filename		: ${1:`vim_snippets#Filename('$1', 'name')`}.v
+	//	* Description	: ${0}
 	// ==================================================
 
 

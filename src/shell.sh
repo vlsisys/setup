@@ -6,6 +6,7 @@ echo '=============================='
 # [Bash Environment Setup]
 # --------------------------------------------------
 cp -rf 		./utils				~	
+cp -rf 		./templates			~	
 cp -rf 		./.bash_aliases		~	
 cp -rf 		./.vimrc			~	
 cp -rf 		./.vim				~	

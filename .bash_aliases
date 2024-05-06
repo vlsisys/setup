@@ -33,9 +33,8 @@ function	ivg(){
 	iverilog -o $1.vvp timescale.v $1_tb.v
 	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
 	rm $1.vvp
-	gtkwave -f ./vcd/$1.vcd -T ~/utils/scripts/gtkwv.tcl 
+	gtkwave -f ./vcd/$1.vcd -T ~/utils/scripts/gtkwv.tcl &
 }
-
 function	iv(){
 	echo '======================================================================'
 	echo ' icarus verilog for' [${1}]
@@ -46,3 +45,7 @@ function	iv(){
 	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
 	rm $1.vvp
 }
+
+export	-f ivg
+export	-f iv
+

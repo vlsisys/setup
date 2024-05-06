@@ -89,6 +89,9 @@ map ,,,			: call VInstance()<CR>
 map <F2>		: NERDTreeToggle<CR>
 map <F3>		: IndentGuidesToggle<CR>
 map <F4>		: FloatermNew<CR>
+map <F8>		: !ivg	%:r:s?_tb??<CR><CR>
+map <F9>		: !iv	%:r:s?_tb??<CR><CR>
+
 map <F10>		: TagbarToggle<CR>
 map <F11>		: VimwikiAll2HTML<CR>
 map <F12>		: %!xxd<CR>
@@ -272,11 +275,11 @@ function! SwitchColor(swinc)
 	execute "colorscheme"
 endfunction
 
- map <F8>        :call SwitchColor(1)<CR>
-imap <F8>   <Esc>:call SwitchColor(1)<CR>
+ map <F5>        :call SwitchColor(1)<CR>
+imap <F5>   <Esc>:call SwitchColor(1)<CR>
 
- map <S-F8>      :call SwitchColor(-1)<CR>
-imap <S-F8> <Esc>:call SwitchColor(-1)<CR>
+ map <S-F5>      :call SwitchColor(-1)<CR>
+imap <S-F5> <Esc>:call SwitchColor(-1)<CR>
 
 function! VInstance()
 	let	l:paramDict		= {}
