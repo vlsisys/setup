@@ -390,3 +390,18 @@ snippet asm
 	:
 	:
 	);
+
+## Basic Template
+snippet .
+	// ==================================================
+	//	[ VLSISYS Lab. ]
+	//	* Author		: Woong Choi (woongchoi@sm.ac.kr)
+	//	* Filename		: ${2:`vim_snippets#Filename('$1', 'name')`}.c
+	//	* Description	: ${1}
+	// ==================================================
+	#include	<stdio.h>
+
+	int	main(){
+		${0}
+		return	0;
+	}

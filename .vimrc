@@ -14,7 +14,7 @@ set	rtp+=~/.vim/pack/plugins/start/vim-airline
 set	rtp+=~/.vim/pack/plugins/start/vim-autoread
 set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
 set	rtp+=~/.vim/pack/plugins/start/vim-surround
-set	rtp+=~/.vim/pack/plugins/start/vim-diminactive
+"set	rtp+=~/.vim/pack/plugins/start/vim-diminactive
 set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
 
 set	rtp+=~/.vim/pack/plugins/start/tlib_vim
@@ -46,7 +46,7 @@ let g:syntastic_error_symbol             = 'E'
 let g:syntastic_warning_symbol           = 'W'
 let g:syntastic_loc_list_height          = 3
 let g:syntastic_verilog_checkers         = ['iverilog']
-let g:syntastic_python_checkers          = ['python']
+let g:syntastic_python_checkers          = ['python3']
 let g:syntastic_cpp_compiler             = 'g++'
 let g:syntastic_cpp_compiler_options     = '-std=c++14'
 
@@ -78,6 +78,7 @@ nmap ,s			: source ~/.vimrc<CR> <ESC> :noh<CR>
 nmap ,v			: e      ~/.vimrc<CR>
 nmap ,b			: e      ~/.bash_aliases<CR>
 nmap ,1			: e      ~/.vim/pack/plugins/start/vim-snippets/snippets/verilog.snippets<CR>
+nmap ,2			: e      ~/.vim/pack/plugins/start/vim-snippets/snippets/c.snippets<CR>
 nmap ,q			: q<CR>
 nmap ,w			: w<CR>
 nmap ,rm		: %s///g<CR>
@@ -93,8 +94,10 @@ map <F8>		: !ivg	%:r:s?_tb??<CR><CR>
 map <F9>		: !iv	%:r:s?_tb??<CR><CR>
 
 map <F10>		: TagbarToggle<CR>
-map <F11>		: VimwikiAll2HTML<CR>
-map <F12>		: %!xxd<CR>
+map <F11>		: !python3 %<CR>
+map <F12>		: !clear;gcc -Wall %:t -o %:t:r && ./%:t:r<CR>
+"map <F11>		: VimwikiAll2HTML<CR>
+"map <F12>		: %!xxd<CR>
 map <C-LEFT>	: tabprev<CR>
 map <C-RIGHT>	: tabnext<CR>
 map <C-n>		: tabnew<CR>
@@ -113,7 +116,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 ""set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 11
+set guifont=Victor\ Mono\ 12
 "set lines=32
 "set columns=100
 set linespace=4
