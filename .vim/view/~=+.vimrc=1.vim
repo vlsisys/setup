@@ -61,7 +61,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
@@ -72,7 +72,7 @@ setlocal includeexpr=
 setlocal indentexpr=GetVimIndent()
 setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=},=else,=cat,=finall,=END,0\\,0=\"\\\ 
 setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
+setlocal iskeyword=@,48-57,_,192-255,#
 setlocal keywordprg=:help
 setlocal linebreak
 setlocal nolisp
@@ -139,25 +139,15 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 4,24fold
-4,24fold
-4,24fold
 29,60fold
-4,60fold
 65,75fold
-4,75fold
 let &fdl = &fdl
-4
-normal! zo
-4
-normal! zo
-4
-normal! zo
-let s:l = 123 - ((27 * winheight(0) + 27) / 54)
+let s:l = 65 - ((64 * winheight(0) + 18) / 37)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 123
-normal! 02|
+keepjumps 65
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

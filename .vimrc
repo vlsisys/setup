@@ -27,7 +27,7 @@ imap <C-J> <Plug>snipMateNextOrTrigger
 "" Bundle Configurations
 ""==================================================
 " plugin:nerdtree&tagbar
-let g:NERDTreeWinSize = 32
+let g:NERDTreeWinSize = 16
 let g:Tlist_WinWidth  = 32
 
 " plugin:ctrlp 
@@ -65,10 +65,13 @@ endif
 set	nocompatible
 set	clipboard=unnamed
 set	viewdir=~/.vim/view
+"set guioptions-=m
+"set guioptions-=T
+"set guioptions-=r
 augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave *.* mkview
-  autocmd BufWinEnter *.* silent! loadview
+	autocmd!
+	autocmd BufWinLeave *.* mkview
+	autocmd BufWinEnter *.* silent! loadview
 augroup END
 
 "==================================================
@@ -116,7 +119,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 ""set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 12
+set guifont=Victor\ Mono\ 18
 "set lines=32
 "set columns=100
 set linespace=4
@@ -210,6 +213,20 @@ au BufReadPost *
 "==================================================
 " Functions
 "==================================================
+
+function! DisableItalic()
+	let his = ''
+	redir => his
+	silent hi
+	redir END
+	let his = substitute(his, '\n\s\+', ' ', 'g')
+	for line in split(his, "\n")
+		if line !~ ' links to ' && line !~ ' cleared$'
+			exe 'hi' substitute(substitute(line, ' xxx ', ' ', ''), 'italic', 'none', 'g')
+		endif
+	endfor
+endfunction
+
 function! FontSizePlus ()
     let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
     let l:gf_size_whole = l:gf_size_whole + 1
@@ -225,6 +242,7 @@ function! FontSizeMinus ()
 endfunction
 
 if has("gui_running")
+    nmap zi :call DisableItalic()<CR>
     nmap z[ :call FontSizeMinus()<CR>
     nmap z] :call FontSizePlus()<CR>
 endif

@@ -128,10 +128,10 @@ snippet	tb
 	// --------------------------------------------------
 	\`define	CLKFREQ		100		// Clock Freq. (Unit: MHz)
 	\`define	SIMCYCLE	10		// Sim. Cycles
-	\`define NBIT		16		// Total BitWidth
-	\`define NBIT_I		8		// Integer Part
-	\`define NBIT_F		8		// Fractional Part
-	\`define NBIT_T		\`NBIT_I+\`NBIT_F
+	\`define BW			16		// Total BitWidth
+	\`define BW_I		8		// Integer Part
+	\`define BW_F		8		// Fractional Part
+	\`define BW_T		\`BW_I+\`BW_F
 
 	\`include	"${3:`vim_snippets#Filename('$1', 'name')`}.v"
 
@@ -148,24 +148,34 @@ snippet	tb
 	// --------------------------------------------------
 	//	Tasks
 	// --------------------------------------------------
+		reg		[4*32-1:0] taskState;	// Length is limitted to 32
+	
 		task resetReleaseAfterNCycles;
 			input	[  9:0]		n;
 			begin
+				taskState	= "Reset";
+				i_rstn = 1'b0;
 				#(n*1000/\`CLKFREQ);
 				i_rstn = 1'b1;
+			end
+		endtask
+	
+		task singleCycle;
+			begin
+				#(1000/\`CLKFREQ);
 			end
 		endtask
 
 	// --------------------------------------------------
 	//	Test Stimulus
 	// --------------------------------------------------
-		integer		i, j, k, n;
+		integer		i, j;
 		initial begin
 			init();
-			resetReleaseAfterNCycles(10);
+			resetReleaseAfterNCycles(4);
 
 			for (i=0; i<\`SIMCYCLE; i++) begin
-				i_d	= \$urandom_range(0, 2**\`NBIT-1);
+
 				#(1000/\`CLKFREQ);
 			end
 			\$finish;
