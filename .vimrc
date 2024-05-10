@@ -65,9 +65,9 @@ endif
 set	nocompatible
 set	clipboard=unnamed
 set	viewdir=~/.vim/view
-"set guioptions-=m
-"set guioptions-=T
-"set guioptions-=r
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
 augroup remember_folds
 	autocmd!
 	autocmd BufWinLeave *.* mkview
