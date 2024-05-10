@@ -8,13 +8,14 @@ set	rtp+=~/.vim/pack/plugins/start/gruvbox
 set	rtp+=~/.vim/pack/plugins/start/ctrlp.vim
 set	rtp+=~/.vim/pack/plugins/start/nerdtree
 set	rtp+=~/.vim/pack/plugins/start/syntastic
+set	rtp+=~/.vim/pack/plugins/start/auto-pairs
 set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
 set	rtp+=~/.vim/pack/plugins/start/vim-wiki
 set	rtp+=~/.vim/pack/plugins/start/vim-airline
 set	rtp+=~/.vim/pack/plugins/start/vim-autoread
 set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
 set	rtp+=~/.vim/pack/plugins/start/vim-surround
-"set	rtp+=~/.vim/pack/plugins/start/vim-diminactive
+set	rtp+=~/.vim/pack/plugins/start/vim-diminactive
 set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
 
 set	rtp+=~/.vim/pack/plugins/start/tlib_vim
@@ -68,6 +69,7 @@ set	viewdir=~/.vim/view
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
+set	tags=~/projects/tags
 augroup remember_folds
 	autocmd!
 	autocmd BufWinLeave *.* mkview
@@ -80,6 +82,7 @@ augroup END
 nmap ,s			: source ~/.vimrc<CR> <ESC> :noh<CR>
 nmap ,v			: e      ~/.vimrc<CR>
 nmap ,b			: e      ~/.bash_aliases<CR>
+nmap ,t			: !cd ~/projects;ctags -R<CR><CR>
 nmap ,1			: e      ~/.vim/pack/plugins/start/vim-snippets/snippets/verilog.snippets<CR>
 nmap ,2			: e      ~/.vim/pack/plugins/start/vim-snippets/snippets/c.snippets<CR>
 nmap ,q			: q<CR>
@@ -93,10 +96,11 @@ map ,,,			: call VInstance()<CR>
 map <F2>		: NERDTreeToggle<CR>
 map <F3>		: IndentGuidesToggle<CR>
 map <F4>		: FloatermNew<CR>
+map <F5>		: TagbarToggle<CR>
+
 map <F8>		: !ivg	%:r:s?_tb??<CR><CR>
 map <F9>		: !iv	%:r:s?_tb??<CR><CR>
 
-map <F10>		: TagbarToggle<CR>
 map <F11>		: !python3 %<CR>
 map <F12>		: !clear;gcc -Wall %:t -o %:t:r && ./%:t:r<CR>
 "map <F11>		: VimwikiAll2HTML<CR>
@@ -119,7 +123,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 ""set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 18
+set guifont=Victor\ Mono\ 24
 "set lines=32
 "set columns=100
 set linespace=4
@@ -263,7 +267,6 @@ let s:swback = 0    " background variants light/dark was not yet switched
 let s:swindex = 0
 
 function! SwitchColor(swinc)
-
 	" if have switched background: dark/light
 	if (s:swback == 1)
 		let s:swback = 0
@@ -276,7 +279,6 @@ function! SwitchColor(swinc)
 		else
 			return SwitchColor(a:swinc)
 		endif
-
 	else
 		let s:swback = 1
 		if (&background == "light")
@@ -284,23 +286,21 @@ function! SwitchColor(swinc)
 		else
 			execute "set background=light"
 		endif
-
 		" roll back if background is not supported
 		if (!exists('g:colors_name'))
 			return SwitchColor(a:swinc)
 		endif
 	endif
-
 	" show current name on screen. :h :echo-redraw
 	redraw
 	execute "colorscheme"
 endfunction
 
- map <F5>        :call SwitchColor(1)<CR>
-imap <F5>   <Esc>:call SwitchColor(1)<CR>
-
- map <S-F5>      :call SwitchColor(-1)<CR>
-imap <S-F5> <Esc>:call SwitchColor(-1)<CR>
+" map <F5>        :call SwitchColor(1)<CR>
+"imap <F5>   <Esc>:call SwitchColor(1)<CR>
+"
+" map <S-F5>      :call SwitchColor(-1)<CR>
+"imap <S-F5> <Esc>:call SwitchColor(-1)<CR>
 
 function! VInstance()
 	let	l:paramDict		= {}
