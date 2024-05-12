@@ -16,8 +16,8 @@ setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=#\ %s
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -34,22 +34,22 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'snippets'
-setlocal filetype=snippets
+if &filetype != 'verilog'
+setlocal filetype=verilog
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
 setlocal foldenable
-setlocal foldexpr=getline(v:lnum)!~'^\\t\\|^$'?'>1':1
+setlocal foldexpr=0
 setlocal foldignore=#
 setlocal foldlevel=0
 setlocal foldmarker={{{,}}}
-setlocal foldmethod=expr
+setlocal foldmethod=manual
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croqlm1
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
@@ -57,10 +57,10 @@ setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=GetSnippetIndent()
-setlocal indentkeys=!^F,o,O,=snippet,=version,=extends
+setlocal indentexpr=GetVerilogIndent()
+setlocal indentkeys=!^F,o,O,0),=begin,=end,=join,=endcase,=endmodule,=endfunction,=endtask,=endspecify,=endconfig,=endgenerate,=endprimitive,=endtable,=`else,=`elsif,=`endif
 setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
+setlocal iskeyword=@,48-57,63,_,192-255
 setlocal keywordprg=
 setlocal linebreak
 setlocal nolisp
@@ -91,19 +91,19 @@ setlocal noshortname
 setlocal showbreak=
 setlocal sidescrolloff=-1
 setlocal signcolumn=auto
-setlocal nosmartindent
+setlocal smartindent
 setlocal softtabstop=0
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
-setlocal statusline=%!airline#statusline(1)
+setlocal statusline=%!airline#statusline(2)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'snippets'
-setlocal syntax=snippets
+if &syntax != 'verilog'
+setlocal syntax=verilog
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -125,252 +125,14 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal nowrap
 setlocal wrapmargin=0
-3
-normal! zo
-8
-normal! zo
-9
-normal! zo
-14
-normal! zo
-15
-normal! zo
-16
-normal! zo
-17
-normal! zo
-19
-normal! zo
-20
-normal! zo
-22
-normal! zo
-23
-normal! zo
-27
-normal! zo
-28
-normal! zo
-30
-normal! zo
-31
-normal! zo
-35
-normal! zo
-36
-normal! zo
-40
-normal! zo
-41
-normal! zo
-49
-normal! zo
-50
-normal! zo
-60
-normal! zo
-61
-normal! zo
-62
-normal! zo
-63
-normal! zo
-67
-normal! zo
-73
-normal! zo
-74
-normal! zo
-78
-normal! zo
-79
-normal! zo
-83
-normal! zo
-84
-normal! zo
-86
-normal! zo
-87
-normal! zo
-89
-normal! zo
-90
-normal! zo
-98
-normal! zo
-99
-normal! zo
-105
-normal! zo
-106
-normal! zo
-110
-normal! zo
-112
-normal! zo
-114
-normal! zo
-115
-normal! zo
-116
-normal! zo
-117
-normal! zo
-121
-normal! zo
-122
-normal! zo
-126
-normal! zo
-127
-normal! zo
-131
-normal! zo
-135
-normal! zo
-136
-normal! zo
-140
-normal! zo
-141
-normal! zo
-142
-normal! zo
-143
-normal! zo
-148
-normal! zo
-149
-normal! zo
-154
-normal! zo
-155
-normal! zo
-166
-normal! zo
-167
-normal! zo
-172
-normal! zo
-173
-normal! zo
-185
-normal! zo
-186
-normal! zo
-191
-normal! zo
-192
-normal! zo
-205
-normal! zo
-206
-normal! zo
-211
-normal! zo
-212
-normal! zo
-226
-normal! zo
-227
-normal! zo
-229
-normal! zo
-230
-normal! zo
-231
-normal! zo
-232
-normal! zo
-234
-normal! zo
-235
-normal! zo
-244
-normal! zo
-245
-normal! zo
-255
-normal! zo
-261
-normal! zo
-262
-normal! zo
-270
-normal! zo
-271
-normal! zo
-272
-normal! zo
-273
-normal! zo
-275
-normal! zo
-276
-normal! zo
-278
-normal! zo
-280
-normal! zo
-282
-normal! zo
-284
-normal! zo
-286
-normal! zo
-288
-normal! zo
-290
-normal! zo
-292
-normal! zo
-293
-normal! zo
-350
-normal! zo
-351
-normal! zo
-354
-normal! zo
-357
-normal! zo
-358
-normal! zo
-361
-normal! zo
-364
-normal! zo
-367
-normal! zo
-370
-normal! zo
-373
-normal! zo
-376
-normal! zo
-377
-normal! zo
-378
-normal! zo
-382
-normal! zo
-383
-normal! zo
-384
-normal! zo
-387
-normal! zo
-394
-normal! zo
-395
-normal! zo
-let s:l = 396 - ((14 * winheight(0) + 18) / 36)
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 339 - ((31 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 396
-normal! 08|
+keepjumps 339
+normal! 043|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

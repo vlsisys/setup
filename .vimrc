@@ -8,7 +8,6 @@ set	rtp+=~/.vim/pack/plugins/start/gruvbox
 set	rtp+=~/.vim/pack/plugins/start/ctrlp.vim
 set	rtp+=~/.vim/pack/plugins/start/nerdtree
 set	rtp+=~/.vim/pack/plugins/start/syntastic
-set	rtp+=~/.vim/pack/plugins/start/auto-pairs
 set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
 set	rtp+=~/.vim/pack/plugins/start/vim-wiki
 set	rtp+=~/.vim/pack/plugins/start/vim-airline
@@ -17,7 +16,6 @@ set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
 set	rtp+=~/.vim/pack/plugins/start/vim-surround
 set	rtp+=~/.vim/pack/plugins/start/vim-diminactive
 set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
-
 set	rtp+=~/.vim/pack/plugins/start/tlib_vim
 set	rtp+=~/.vim/pack/plugins/start/vim-addon-mw-utils
 set	rtp+=~/.vim/pack/plugins/start/vim-snippets
@@ -28,8 +26,8 @@ imap <C-J> <Plug>snipMateNextOrTrigger
 "" Bundle Configurations
 ""==================================================
 " plugin:nerdtree&tagbar
-let g:NERDTreeWinSize = 16
-let g:Tlist_WinWidth  = 32
+let g:NERDTreeWinSize = 22
+let g:Tlist_WinWidth  = 22
 
 " plugin:ctrlp 
 let g:ctrlp_map = '<c-p>'
@@ -75,7 +73,7 @@ augroup remember_folds
 	autocmd BufWinLeave *.* mkview
 	autocmd BufWinEnter *.* silent! loadview
 augroup END
-
+autocmd	FileType * setlocal comments-=://
 "==================================================
 " Map Setting
 "==================================================
@@ -97,7 +95,7 @@ map <F2>		: NERDTreeToggle<CR>
 map <F3>		: IndentGuidesToggle<CR>
 map <F4>		: FloatermNew<CR>
 map <F5>		: TagbarToggle<CR>
-
+map	<F7>		: SyntasticToggleMode<CR>
 map <F8>		: !ivg	%:r:s?_tb??<CR><CR>
 map <F9>		: !iv	%:r:s?_tb??<CR><CR>
 
@@ -123,7 +121,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 ""set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 24
+set guifont=Victor\ Mono\ 20
 "set lines=32
 "set columns=100
 set linespace=4
@@ -296,11 +294,11 @@ function! SwitchColor(swinc)
 	execute "colorscheme"
 endfunction
 
-" map <F5>        :call SwitchColor(1)<CR>
-"imap <F5>   <Esc>:call SwitchColor(1)<CR>
-"
-" map <S-F5>      :call SwitchColor(-1)<CR>
-"imap <S-F5> <Esc>:call SwitchColor(-1)<CR>
+ map <F6>        :call SwitchColor(1)<CR>
+imap <F6>   <Esc>:call SwitchColor(1)<CR>
+
+ map <S-F6>      :call SwitchColor(-1)<CR>
+imap <S-F6> <Esc>:call SwitchColor(-1)<CR>
 
 function! VInstance()
 	let	l:paramDict		= {}
