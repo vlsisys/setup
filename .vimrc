@@ -33,6 +33,11 @@ let g:Tlist_WinWidth  = 22
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+" plugin:diminactive
+let g:diminactive_use_colorcolumn	= 1
+let g:diminactive_use_syntax		= 1
+let g:diminactive_enable_focus		= 1
+
 " plugin:syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -120,11 +125,11 @@ map <C-n>		: tabnew<CR>
 colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
-""set guifont=Jetbrains\ Mono\ 16
+"set guifont=Jetbrains\ Mono\ 16
 set guifont=Victor\ Mono\ 20
 "set lines=32
 "set columns=100
-set linespace=4
+set linespace=2
 set nocursorcolumn
 set nocursorline
 set laststatus=2
@@ -188,7 +193,7 @@ iabbr	<expr>	__file		expand('%:p')
 iabbr	<expr>	__name		expand('%')
 iabbr	<expr>	__pwd		expand('%:p:h')
 iabbr	<expr>	__branch	system("git rev-parse --abbrev-ref HEAD")
-iabbr	<expr>	__tcsh		system("which tcsh")
+iabbr	<expr>	__bash		system("which bash")
 
 iabbr			__email		woongchoi@sm.ac.kr
 "==================================================
@@ -228,6 +233,7 @@ function! DisableItalic()
 		endif
 	endfor
 endfunction
+
 
 function! FontSizePlus ()
     let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')

@@ -104,7 +104,9 @@ snippet tde
 	} ${1:my_dest_t};
 # Module 
 snippet	md
-	module	${0:`vim_snippets#Filename('$1', 'name')`}
+	\`include	"${0:riscv_params.v}"
+
+	module ${1:`vim_snippets#Filename('$1', 'name')`}
 	#(	
 		parameter	PARAM0	= 0,
 		parameter	PARAM1	= 1,
@@ -146,8 +148,8 @@ snippet	tb
 	// --------------------------------------------------
 	//	Clock
 	// --------------------------------------------------
-		reg							i_clk;
-		always	#(500/\`CLKFREQ)	i_clk = ~i_clk;
+		reg							i_clk = 0;
+		always	#(500/\`CLKFREQ)		i_clk = ~i_clk;
 
 	// --------------------------------------------------
 	//	Tasks
