@@ -104,20 +104,18 @@ snippet tde
 	} ${1:my_dest_t};
 # Module 
 snippet	md
-	\`include	"${0:riscv_params.v}"
-
 	module ${1:`vim_snippets#Filename('$1', 'name')`}
 	#(	
-		parameter	PARAM0	= 0,
-		parameter	PARAM1	= 1,
-		parameter	PARAM2	= 2
+		parameter	BW_DATA	= 32,
+		parameter	BW_CTRL	= 4
 	)
 	(	
-		output reg	[ 31:0]		o_out,
-		output reg				o_valid,
-		input		[ 31:0]		i_in,
-		input					i_clk,
-		input					i_rstn
+		output reg	[BW_DATA-1:0]	o_out,
+		output reg					o_valid,
+		input		[BW_DATA-1:0]	i_in,
+		input		[BW_CTRL-1:0]	i_ctrl,
+		input						i_clk,
+		input						i_rstn
 	);
 
 	endmodule

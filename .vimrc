@@ -101,8 +101,8 @@ map <F3>		: IndentGuidesToggle<CR>
 map <F4>		: FloatermNew<CR>
 map <F5>		: TagbarToggle<CR>
 map	<F7>		: SyntasticToggleMode<CR>
-map <F8>		: !ivg	%:r:s?_tb??<CR><CR>
-map <F9>		: !iv	%:r:s?_tb??<CR><CR>
+map <F8>		: !ivg	%:r:s?_tb??<CR>
+map <F9>		: !iv	%:r:s?_tb??<CR>
 
 map <F11>		: !python3 %<CR>
 map <F12>		: !clear;gcc -Wall %:t -o %:t:r && ./%:t:r<CR>
@@ -360,9 +360,21 @@ function! VInstance()
 		endif
 	endfor
 
-	" Signals for Testbench
+	" Variable Initialization
 	let	l:maxTapNum = max([4, float2nr(ceil(l:maxStrLen/4.0))])
 	let	l:lines = "\t"
+
+	" Define Local Parameters
+	if(len(l:paramList))
+		for	l:aKey in l:paramList
+			let	l:keyTabNum	= len(".".l:aKey)/4.0
+			let	l:keyTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:keyTabNum + 1)))
+			let	l:lines = l:lines . printf("localparam\t%s%s= %s;\r", l:aKey, l:keyTabStr, l:paramDict[aKey])
+		endfor
+		let	l:lines = l:lines . printf("\r")
+	endif
+
+	" Signals for Testbench
 	for	l:aLine in l:portLineList
 		let	l:aLineOrig	= l:aLine
 		let	l:aLine	= substitute(l:aLine, '\s\+output\s\+reg', 'wire', '')
@@ -382,14 +394,16 @@ function! VInstance()
 	if(len(l:paramList))
 		let	l:lines = l:lines . printf("#(\r")
 		for	l:aKey in l:paramList
-			let	l:keyTabNum	= float2nr(ceil(len(".".l:aKey)/4.0))
-			let	l:valTabNum	= float2nr(ceil(len(".".l:paramDict[l:aKey])/4.0))
-			let	l:keyTabStr	= repeat("\t", l:maxTapNum - l:keyTabNum + 1)
-			let	l:valTabStr	= repeat("\t", l:maxTapNum - l:valTabNum + 1)
+			let	l:keyTabNum	= len(".".l:aKey)/4.0
+			let	l:valTabNum	= len(".".l:paramDict[l:aKey])/4.0
+			let	l:keyTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:keyTabNum + 1)))
+			let	l:valTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:valTabNum + 1)))
 			if(l:aKey != l:paramList[-1])
-				let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
+				"let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
+				let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:aKey, l:keyTabStr)
 			else
-				let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
+				"let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
+				let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, l:aKey, l:keyTabStr)
 			endif
 		endfor
 		let	l:lines = l:lines . printf("u_%s(\r", l:moduleName)
@@ -398,8 +412,8 @@ function! VInstance()
 	endif
 
 	for	l:portName in l:portList
-		let	l:tabNum	= float2nr(ceil(len(".".l:portName)/4.0))
-		let	l:tabStr	= repeat("\t", l:maxTapNum - l:tabNum + 1)
+		let	l:tabNum	= len(".".l:portName)/4.0
+		let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum + 1)))
 		if(l:portName != l:portList[-1])
 			let	l:lines = l:lines . printf(".%s%s(%s%s),\r" , l:portName, l:tabStr, l:portName, l:tabStr)
 		else
@@ -414,7 +428,9 @@ function! VInstance()
 		if(matchstr(l:aLine, "input") != "")
 			let l:portName	= split(l:aLine)[-1]
 			let	l:portName	= substitute(l:portName, ',', '', '')
-			let	l:lines = l:lines . printf("%s\t= 0;\r", l:portName)
+			let	l:tabNum	= len(".".l:portName)/4.0
+			let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum + 1)))
+			let	l:lines = l:lines . printf("%s%s= 0;\r", l:portName, l:tabStr)
 		endif
 	endfor
 	let	l:lines = l:lines . printf("end\r")
