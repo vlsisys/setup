@@ -119,6 +119,13 @@ snippet	md
 	);
 
 	endmodule
+# Always for Combinational Logic
+snippet alc
+	always @(*) begin
+		case (${1})
+			${0}
+		endcase
+	end
 
 # Test Bench Template
 
@@ -216,9 +223,9 @@ snippet co
 	// ==================================================
 	//	[ VLSISYS Lab. ]
 	//	* Author		: Woong Choi (woongchoi@sm.ac.kr)
-	//	* Filename		: ${1:`vim_snippets#Filename('$1', 'name')`}.v
-	//	* Description	: ${0}
+	//	* Filename		: ${0:`vim_snippets#Filename('$1', 'name')`}.v
+	//	* Description	: ${1}
 	// ==================================================
-
+	
 
 # Next...
