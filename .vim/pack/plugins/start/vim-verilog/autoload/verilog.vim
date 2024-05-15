@@ -127,7 +127,7 @@ function! verilog#VInst(dispOption)
 			if(matchstr(l:aLine, "input") != "")
 				let l:portName	= split(l:aLine)[-1]
 				let	l:portName	= substitute(l:portName, ',', '', '')
-				let	l:tabNum	= len(".".l:portName)/4.0
+				let	l:tabNum	= len(l:portName)/4.0
 				let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum)))
 				let	l:lines = l:lines . printf("%s%s= 0;\r", l:portName, l:tabStr)
 			endif
@@ -160,4 +160,3 @@ function! verilog#VInst(dispOption)
 	exe	printf(":.normal o%s", l:lines)
 
 endfunction
-
