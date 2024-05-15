@@ -98,7 +98,7 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
-setlocal statusline=%!airline#statusline(2)
+setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
@@ -197,28 +197,23 @@ normal! zo
 normal! zo
 106
 normal! zo
-122
+124
 normal! zo
-123
-normal! zo
-130
+125
 normal! zo
 132
 normal! zo
-211
+134
 normal! zo
-212
+214
 normal! zo
-221
-normal! zo
-222
-normal! zo
-let s:l = 227 - ((30 * winheight(0) + 17) / 35)
+let s:l = 140 - ((13 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 227
-normal! 043|
+keepjumps 140
+normal! 028|
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

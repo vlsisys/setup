@@ -98,12 +98,12 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
-setlocal statusline=%!airline#statusline(2)
+setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'off'
-setlocal syntax=off
+if &syntax != 'systemverilog'
+setlocal syntax=systemverilog
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -127,11 +127,11 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 41 - ((13 * winheight(0) + 16) / 33)
+let s:l = 32 - ((31 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 41
+keepjumps 32
 normal! 015|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch

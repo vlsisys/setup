@@ -64,10 +64,27 @@ function! verilog#VInst(dispOption)
 	if(len(l:paramList))
 		for	l:aKey in l:paramList
 			let	l:keyTabNum	= len(".".l:aKey)/4.0
-			let	l:keyTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:keyTabNum + 1)))
+			let	l:keyTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:keyTabNum)))
 			let	l:lines = l:lines . printf("localparam\t%s%s= %s;\r", l:aKey, l:keyTabStr, l:paramDict[aKey])
 		endfor
 		let	l:lines = l:lines . printf("\r")
+	endif
+
+	" Signals for TestBench (output -> wire, input -> reg)
+	if(a:dispOption == 1)
+		for	l:aLine in l:portLineList
+			let	l:aLineOrig	= l:aLine
+			let	l:aLine	= substitute(l:aLine, '\s\+output\s\+reg', 'wire', '')
+			let	l:aLine	= substitute(l:aLine, '\s\+output\t', 'wire', '')
+			let	l:aLine	= substitute(l:aLine, '\s\+inout', 'reg', '')
+			let	l:aLine	= substitute(l:aLine, '\s\+input', 'reg', '')
+			let	l:aLine	= substitute(l:aLine, ',', ';', '')
+   			if(l:aLineOrig != l:portLineList[-1])
+				let	l:lines = l:lines . printf("%s\r", l:aLine)
+			else
+				let	l:lines = l:lines . printf("%s;\r\r", l:aLine)
+			endif
+		endfor
 	endif
 
 	" Module Instantiation
@@ -77,8 +94,8 @@ function! verilog#VInst(dispOption)
 		for	l:aKey in l:paramList
 			let	l:keyTabNum	= len(".".l:aKey)/4.0
 			let	l:valTabNum	= len(".".l:paramDict[l:aKey])/4.0
-			let	l:keyTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:keyTabNum + 1)))
-			let	l:valTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:valTabNum + 1)))
+			let	l:keyTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:keyTabNum)))
+			let	l:valTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:valTabNum)))
 			if(l:aKey != l:paramList[-1])
 				"let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
 				let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:aKey, l:keyTabStr)
@@ -94,7 +111,7 @@ function! verilog#VInst(dispOption)
 
 	for	l:portName in l:portList
 		let	l:tabNum	= len(".".l:portName)/4.0
-		let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum + 1)))
+		let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum)))
 		if(l:portName != l:portList[-1])
 			let	l:lines = l:lines . printf(".%s%s(%s%s),\r" , l:portName, l:tabStr, l:portName, l:tabStr)
 		else
@@ -111,7 +128,7 @@ function! verilog#VInst(dispOption)
 				let l:portName	= split(l:aLine)[-1]
 				let	l:portName	= substitute(l:portName, ',', '', '')
 				let	l:tabNum	= len(".".l:portName)/4.0
-				let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum + 1)))
+				let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum)))
 				let	l:lines = l:lines . printf("%s%s= 0;\r", l:portName, l:tabStr)
 			endif
 		endfor
