@@ -213,12 +213,12 @@ normal! zo
 normal! zo
 222
 normal! zo
-let s:l = 128 - ((27 * winheight(0) + 16) / 33)
+let s:l = 227 - ((30 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 128
-normal! 07|
+keepjumps 227
+normal! 043|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

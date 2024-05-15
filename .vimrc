@@ -122,7 +122,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 20
+set guifont=Victor\ Mono\ 24
 "set lines=32
 "set columns=100
 set linespace=2
