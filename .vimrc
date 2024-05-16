@@ -38,7 +38,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 0
+let g:syntastic_auto_loc_list            = 1
 let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 1
 let g:syntastic_error_symbol             = 'E'
@@ -77,7 +77,7 @@ autocmd	FileType * setlocal comments-=://
 "==================================================
 " Map Setting
 "==================================================
-nmap ,s			: source ~/.vimrc<CR> <ESC> :noh<CR>
+nmap ,s			: w<CR> :source ~/.vimrc<CR> <ESC> :noh<CR>
 nmap ,v			: e      ~/.vimrc<CR>
 nmap ,b			: e      ~/.bash_aliases<CR>
 nmap ,t			: !cd ~/projects;ctags -R<CR><CR>
@@ -122,7 +122,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 24
+set guifont=Victor\ Mono\ 22
 "set lines=32
 "set columns=100
 set linespace=2

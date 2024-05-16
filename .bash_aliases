@@ -26,6 +26,7 @@ alias	untargz='tar -zxvf $1'
 # ----------------------------------------------
 function	cd	{ if (( $#==0 )); then builtin cd ~ && ls; else builtin cd "$@" && ls; fi }
 cd		.
+
 function	ivg(){
 	echo '======================================================================'
 	echo ' icarus verilog for' [${1}]
