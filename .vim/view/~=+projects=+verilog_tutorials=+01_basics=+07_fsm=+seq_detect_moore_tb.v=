@@ -127,12 +127,12 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 56 - ((9 * winheight(0) + 12) / 24)
+let s:l = 65 - ((30 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 56
-normal! 016|
+keepjumps 65
+normal! 026|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

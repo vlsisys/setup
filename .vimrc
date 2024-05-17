@@ -1,26 +1,25 @@
 ""==================================================
 "" Runtime Path for Plug-Ins
 ""==================================================
-set	rtp+=~/.vim/pack/plugins/start/fzf
-set	rtp+=~/.vim/pack/plugins/start/tagbar
-set	rtp+=~/.vim/pack/plugins/start/tabular
-set	rtp+=~/.vim/pack/plugins/start/gruvbox
-set	rtp+=~/.vim/pack/plugins/start/ctrlp.vim
-set	rtp+=~/.vim/pack/plugins/start/nerdtree
-set	rtp+=~/.vim/pack/plugins/start/syntastic
-set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
-set	rtp+=~/.vim/pack/plugins/start/vim-wiki
-set	rtp+=~/.vim/pack/plugins/start/vim-airline
-set	rtp+=~/.vim/pack/plugins/start/vim-autoread
-set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
-set	rtp+=~/.vim/pack/plugins/start/vim-surround
-set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
-set	rtp+=~/.vim/pack/plugins/start/tlib_vim
-set	rtp+=~/.vim/pack/plugins/start/vim-addon-mw-utils
-set	rtp+=~/.vim/pack/plugins/start/vim-snippets
-set	rtp+=~/.vim/pack/plugins/start/vim-snipmate
-set	rtp+=~/.vim/pack/plugins/start/vim-verilog
-imap <C-J> <Plug>snipMateNextOrTrigger
+"set	rtp+=~/.vim/pack/plugins/start/fzf
+"set	rtp+=~/.vim/pack/plugins/start/tagbar
+"set	rtp+=~/.vim/pack/plugins/start/tabular
+"set	rtp+=~/.vim/pack/plugins/start/gruvbox
+"set	rtp+=~/.vim/pack/plugins/start/ctrlp.vim
+"set	rtp+=~/.vim/pack/plugins/start/nerdtree
+"set	rtp+=~/.vim/pack/plugins/start/syntastic
+"set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
+"set	rtp+=~/.vim/pack/plugins/start/vim-wiki
+"set	rtp+=~/.vim/pack/plugins/start/vim-airline
+"set	rtp+=~/.vim/pack/plugins/start/vim-autoread
+"set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
+"set	rtp+=~/.vim/pack/plugins/start/vim-surround
+"set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
+"set	rtp+=~/.vim/pack/plugins/start/tlib_vim
+"set	rtp+=~/.vim/pack/plugins/start/vim-addon-mw-utils
+"set	rtp+=~/.vim/pack/plugins/start/vim-snippets
+"set	rtp+=~/.vim/pack/plugins/start/vim-snipmate
+"set	rtp+=~/.vim/pack/plugins/start/vim-verilog
 
 ""==================================================
 "" Bundle Configurations
@@ -34,12 +33,13 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " plugin:syntastic
+imap <C-J> <Plug>snipMateNextOrTrigger
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
+let g:syntastic_auto_loc_list            = 0
+let g:syntastic_check_on_open            = 0
 let g:syntastic_check_on_wq              = 1
 let g:syntastic_error_symbol             = 'E'
 let g:syntastic_warning_symbol           = 'W'
@@ -77,7 +77,7 @@ autocmd	FileType * setlocal comments-=://
 "==================================================
 " Map Setting
 "==================================================
-nmap ,s			: w<CR> :source ~/.vimrc<CR> <ESC> :noh<CR>
+nmap ,s			: w<CR> :source ~/.vimrc<CR> :source ~/.vim/pack/plugins/start/vim-verilog/autoload/verilog.vim <CR>
 nmap ,v			: e      ~/.vimrc<CR>
 nmap ,b			: e      ~/.bash_aliases<CR>
 nmap ,t			: !cd ~/projects;ctags -R<CR><CR>
@@ -97,11 +97,11 @@ map <F3>		: IndentGuidesToggle<CR>
 map <F4>		: FloatermNew<CR>
 map <F5>		: TagbarToggle<CR>
 map	<F7>		: SyntasticToggleMode<CR>
-map <F8>		: !ivg	%:r:s?_tb??<CR>
-map <F9>		: !iv	%:r:s?_tb??<CR>
+map <F8>		: w <CR> : !ivg	%:r:s?_tb??<CR><CR>
+map <F9>		: w <CR> : !iv	%:r:s?_tb??<CR><CR>
 
-map <F11>		: !python3 %<CR>
-map <F12>		: !clear;gcc -Wall %:t -o %:t:r && ./%:t:r<CR>
+map <F11>		: w <CR> : !python3 %<CR><CR>
+map <F12>		: w <CR> : !clear; gcc -g -Wall %:t -o %:t:r && ./%:t:r<CR>
 "map <F11>		: VimwikiAll2HTML<CR>
 "map <F12>		: %!xxd<CR>
 map <C-LEFT>	: tabprev<CR>
@@ -122,7 +122,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 22
+set guifont=Victor\ Mono\ 26
 "set lines=32
 "set columns=100
 set linespace=2

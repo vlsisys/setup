@@ -74,14 +74,14 @@ setlocal modeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 setlocal number
-setlocal numberwidth=6
+setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
 setlocal noreadonly
-setlocal norelativenumber
+setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
@@ -98,12 +98,12 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
-setlocal statusline=%!airline#statusline(2)
+setlocal statusline=%!airline#statusline(3)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'off'
-setlocal syntax=off
+if &syntax != 'verilog'
+setlocal syntax=verilog
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -127,13 +127,12 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 26 - ((25 * winheight(0) + 26) / 53)
+let s:l = 8 - ((7 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 26
+keepjumps 8
 normal! 018|
 let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

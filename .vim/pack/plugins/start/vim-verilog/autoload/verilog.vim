@@ -2,7 +2,7 @@
 " Author:       Woong Choi
 " Version:      0.0
 
-function! verilog#VInst(dispOption)
+function! verilog#VInst(printOpt)
 	let	l:paramDict		= {}
 	let	l:portDict		= {}
 	let	l:paramList		= []
@@ -71,14 +71,15 @@ function! verilog#VInst(dispOption)
 	endif
 
 	" Signals for TestBench (output -> wire, input -> reg)
-	if(a:dispOption == 1)
+	if(a:printOpt == 1)
 		for	l:aLine in l:portLineList
 			let	l:aLineOrig	= l:aLine
-			let	l:aLine	= substitute(l:aLine, '\s\+output\s\+reg', 'wire', '')
-			let	l:aLine	= substitute(l:aLine, '\s\+output\t', 'wire', '')
-			let	l:aLine	= substitute(l:aLine, '\s\+inout', 'reg', '')
-			let	l:aLine	= substitute(l:aLine, '\s\+input', 'reg', '')
-			let	l:aLine	= substitute(l:aLine, ',', ';', '')
+			let	l:aLine	= substitute(l:aLine , '\s\+output\s\+reg' , 'wire' , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+output\t'      , 'wire' , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+inout'         , 'reg'  , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+input'         , 'reg'  , '')
+			let	l:aLine	= substitute(l:aLine , 'BW'                , '`BW'  , '')
+			let	l:aLine	= substitute(l:aLine , ','                 , ';' , '')
    			if(l:aLineOrig != l:portLineList[-1])
 				let	l:lines = l:lines . printf("%s\r", l:aLine)
 			else
@@ -98,10 +99,10 @@ function! verilog#VInst(dispOption)
 			let	l:valTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:valTabNum)))
 			if(l:aKey != l:paramList[-1])
 				"let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
-				let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:aKey, l:keyTabStr)
+				let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, "`".l:aKey, l:keyTabStr)
 			else
 				"let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
-				let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, l:aKey, l:keyTabStr)
+				let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, "`".l:aKey, l:keyTabStr)
 			endif
 		endfor
 		let	l:lines = l:lines . printf("u_%s(\r", l:moduleName)
@@ -115,14 +116,70 @@ function! verilog#VInst(dispOption)
 		if(l:portName != l:portList[-1])
 			let	l:lines = l:lines . printf(".%s%s(%s%s),\r" , l:portName, l:tabStr, l:portName, l:tabStr)
 		else
-			let	l:lines = l:lines . printf(".%s%s(%s%s)\r);\r", l:portName, l:tabStr, l:portName, l:tabStr)
+			let	l:lines = l:lines . printf(".%s%s(%s%s)\r);\r\r", l:portName, l:tabStr, l:portName, l:tabStr)
 		endif
 	endfor
 
-	if(a:dispOption == 1)
-		" Initialization Task
+	if(a:printOpt == 1)
+
+		" Clock
+		for	l:portName in l:portList
+			if(matchstr(l:portName, "clk") != "") 
+				let	l:lines = l:lines . printf("\b")
+				let	l:lines = l:lines . printf("// --------------------------------------------------\r")
+				let	l:lines = l:lines . printf("//	Clock\r")
+				let	l:lines = l:lines . printf("// --------------------------------------------------\r\t")
+				let	l:lines = l:lines . printf("reg							i_clk = 0;\r")
+				let	l:lines = l:lines . printf("always	#(500/`CLKFREQ)		i_clk = ~i_clk;\r\r")
+			endif
+		endfor
+
+		" Test Vector Configuration
+		let	l:lines = l:lines . printf("\b")
+		let	l:lines = l:lines . printf("// --------------------------------------------------\r")
+		let	l:lines = l:lines . printf("//	Test Vector Configuration\r")
+		let	l:lines = l:lines . printf("// --------------------------------------------------\r\t")
+		for	l:aLine in l:portLineList
+			let	l:aLineOrig	= l:aLine
+			let	l:aLine	= substitute(l:aLine , '\s\+output\s\+reg' , 'reg\t'       , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+output\t'      , 'reg\t'       , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+inout'         , 'reg'         , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+input'         , 'reg'         , '')
+			let	l:aLine	= substitute(l:aLine , 'BW'                , '`BW'         , '')
+			let	l:aLine	= substitute(l:aLine , 'o_'                , 'vo_'         , '')
+			let	l:aLine	= substitute(l:aLine , 'i_'                , 'vi_'         , '')
+			let	l:aLine	= substitute(l:aLine , ','                 , '[0:`NVEC-1];' , '')
+   			if(l:aLineOrig != l:portLineList[-1])
+				let	l:lines = l:lines . printf("%s\r", l:aLine)
+			else
+				let	l:lines = l:lines . printf("%s[0:`NVEC-1];\r\r", l:aLine)
+			endif
+		endfor
+
+		let	l:lines = l:lines . printf("initial begin\r")
+
+		for	l:portName in l:portList
+			let	l:tabNum	= (len(l:portName)+5)/4.0
+			let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum)))
+			if(l:portName != l:portList[-1])
+				let	l:lines = l:lines . printf("$readmemb(\"./vec/%s.vec\",%sv%s);\r" , l:portName, l:tabStr, l:portName)
+			else
+				let	l:lines = l:lines . printf("$readmemb(\"./vec/%s.vec\",%sv%s);\rend\r\r" , l:portName, l:tabStr, l:portName)
+			endif
+		endfor
+
+		" Task
+		let	l:lines = l:lines . printf("\b")
+		let	l:lines = l:lines . printf("// --------------------------------------------------\r")
+		let	l:lines = l:lines . printf("//	Tasks\r")
+		let	l:lines = l:lines . printf("// --------------------------------------------------\r\t")
+		let	l:lines = l:lines . printf("reg		[4*32-1:0]	taskState;\r")
+		let	l:lines = l:lines . printf("integer				err	= 0;\r\r")
+
+		" Task: Init
 		let	l:lines = l:lines . printf("task init;\r")
 		let	l:lines = l:lines . printf("begin\r")
+		let	l:lines = l:lines . printf("taskState		= \"Init\";\r")
 		for	l:aLine in l:portLineList
 			if(matchstr(l:aLine, "input") != "")
 				let l:portName	= split(l:aLine)[-1]
@@ -133,29 +190,73 @@ function! verilog#VInst(dispOption)
 			endif
 		endfor
 		let	l:lines = l:lines . printf("end\r")
-		let	l:lines = l:lines . printf("endtask\r")
+		let	l:lines = l:lines . printf("endtask\r\r")
 
-		" Make Random Input Stimulus
-		let l:inputBits	= 0
-		let l:iPortList	= [] 
+		" Task: Reset
 		for	l:portName in l:portList
-			let l:portType	= l:portDict[l:portName][0]
-			let l:portBits	= l:portDict[l:portName][1]
-			if(l:portType == "input")
-				let	l:paramList	= add(l:iPortList, l:portName)
-				let l:inputBits	= l:inputBits + l:portBits
+			if(matchstr(l:portName, "rst") != "") 
+				let	l:lines = l:lines . printf("task resetNCycle;\r")
+				let	l:lines = l:lines . printf("input	[9:0]	i;\r")
+				let	l:lines = l:lines . printf("begin\r")
+				let	l:lines = l:lines . printf("taskState		= \"Reset\";\r")
+				let	l:lines = l:lines . printf("%s	= 1'b0;\r", l:portName)
+				let	l:lines = l:lines . printf("#(i*1000/`CLKFREQ);\r")
+				let	l:lines = l:lines . printf("%s	= 1'b1;\r", l:portName)
+				let	l:lines = l:lines . printf("end\r")
+				let	l:lines = l:lines . printf("endtask\r\r")
 			endif
 		endfor
 
-		let	l:lines = l:lines . printf("//{")
-		for	l:portName in l:iPortList
-			if(l:portName != l:iPortList[-1])
-				let	l:lines = l:lines . printf("%s, ", l:portName)
-			else
-				let	l:lines = l:lines . printf("%s} = $urandom_range(0, 2**%s-1);", l:portName, l:inputBits)
+		" Task: vecInsert
+		let	l:lines = l:lines . printf("task vecInsert;\r")
+		let	l:lines = l:lines . printf("input	[$clog2(`NVEC)-1:0]	i;\r")
+		let	l:lines = l:lines . printf("begin\r")
+		let	l:lines = l:lines . printf("$sformat(taskState,	\"VEC[%%3d]\", i);\r")
+		for	l:aLine in l:portLineList
+			if(matchstr(l:aLine, "input") != "")
+				let l:portName	= split(l:aLine)[-1]
+				let	l:portName	= substitute(l:portName, ',', '', '')
+				let	l:tabNum	= len(l:portName)/4.0
+				let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum)))
+				let	l:lines = l:lines . printf("%s%s= v%s[i];\r", l:portName, l:tabStr, l:portName)
 			endif
 		endfor
+		let	l:lines = l:lines . printf("end\r")
+		let	l:lines = l:lines . printf("endtask\r\r")
+
+		" Task: vecVerify
+		let	l:lines = l:lines . printf("task vecVerify;\r")
+		let	l:lines = l:lines . printf("input	[$clog2(`NVEC)-1:0]	i;\r")
+		let	l:lines = l:lines . printf("begin\r")
+		let	l:lines = l:lines . printf("#(0.1*1000/`CLKFREQ);\r")
+		let	l:oVectorMatchList	= []
+		" let	l:portList	= add(l:portList, l:portName)
+		for	l:aLine in l:portLineList
+			if(matchstr(l:aLine, "output") != "")
+				let l:portName	= split(l:aLine)[-1]
+				let	l:portName	= substitute(l:portName, ',', '', '')
+				let	l:tabNum	= len(l:portName)/4.0
+				let	l:tabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:tabNum - 1)))
+				let	l:lines 	= l:lines . printf("if (%s%s!= v%s[i]) begin $display(\"[Idx: %%3d] Mismatched %s\", i); end\r", l:portName, l:tabStr, l:portName, l:portName)
+				let	l:oVectorMatchList = add(l:oVectorMatchList, printf("(%s != v%s[i])", l:portName, l:portName))
+			endif
+		endfor
+
+		let	l:lines = l:lines . printf("if (")
+		for l:oVectorMatch in l:oVectorMatchList
+			if (l:oVectorMatch != l:oVectorMatchList[-1])
+				let	l:lines = l:lines . printf("%s || ", l:oVectorMatch)
+			else
+				let	l:lines = l:lines . printf("%s) begin err++; end\r", l:oVectorMatch)
+			endif
+		endfor
+		let	l:lines = l:lines . printf("#(0.9*1000/`CLKFREQ);\r")
+		let	l:lines = l:lines . printf("end\r")
+		let	l:lines = l:lines . printf("endtask\r\r")
+
 	endif
+
+
 
 	exe	printf(":.normal o%s", l:lines)
 

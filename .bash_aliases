@@ -29,25 +29,26 @@ cd		.
 
 function	ivg(){
 	echo '======================================================================'
-	echo ' icarus verilog for' [${1}]
+	echo ' Icarus Verilog w/ GTKWave for' [${1}]
 	echo '======================================================================'
-	rm -rf vcd
-	mkdir -p vcd
+	rm -rf vcd log
+	mkdir -p vcd log
 	ln -fs ~/templates/verilog/timescale.v timescale.v 
 	iverilog -o $1.vvp timescale.v $1_tb.v
-	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
+	vvp	$1.vvp +vcd_file=./vcd/$1.vcd > ./log/$1.log
 	rm $1.vvp
 	gtkwave -f ./vcd/$1.vcd -T ~/utils/scripts/gtkwv.tcl &
 }
+
 function	iv(){
 	echo '======================================================================'
-	echo ' icarus verilog for' [${1}]
+	echo ' Icarus Verilog w/o GTKWave for' [${1}]
 	echo '======================================================================'
-	rm -rf vcd
-	mkdir -p vcd
+	rm -rf vcd log
+	mkdir -p vcd log
 	ln -fs ~/templates/verilog/timescale.v timescale.v 
 	iverilog -o $1.vvp timescale.v $1_tb.v
-	vvp	$1.vvp +vcd_file=./vcd/$1.vcd
+	vvp	$1.vvp +vcd_file=./vcd/$1.vcd > ./log/$1.log
 	rm $1.vvp
 }
 

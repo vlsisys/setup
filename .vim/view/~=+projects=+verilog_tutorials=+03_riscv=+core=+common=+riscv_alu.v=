@@ -74,14 +74,14 @@ setlocal modeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
 setlocal number
-setlocal numberwidth=6
+setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
 setlocal noreadonly
-setlocal norelativenumber
+setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
@@ -127,13 +127,12 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 40 - ((39 * winheight(0) + 26) / 52)
+let s:l = 8 - ((4 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 40
-normal! 09|
+keepjumps 8
+normal! 020|
 let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

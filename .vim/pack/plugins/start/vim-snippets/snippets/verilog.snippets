@@ -136,10 +136,11 @@ snippet	tb
 	//	Define Global Variables
 	// --------------------------------------------------
 	\`define	CLKFREQ		100		// Clock Freq. (Unit: MHz)
-	\`define	SIMCYCLE	10		// Sim. Cycles
-	\`define BW_DATA		32
-	\`define BW_ADDR		5
-	\`define BW_CTRL		4
+	\`define	SIMCYCLE	`NVEC	// Sim. Cycles
+	\`define BW_DATA		32		// Bitwidth of ~~
+	\`define BW_ADDR		5		// Bitwidth of ~~
+	\`define BW_CTRL		4		// Bitwidth of ~~
+	\`define NVEC		100		// # of Test Vector
 
 	// --------------------------------------------------
 	//	Includes
@@ -150,34 +151,8 @@ snippet	tb
 	// --------------------------------------------------
 	//	DUT Signals & Instantiate
 	// --------------------------------------------------
+	${1}
 
-
-	// --------------------------------------------------
-	//	Clock
-	// --------------------------------------------------
-	//	reg							i_clk = 0;
-		always	#(500/\`CLKFREQ)		i_clk = ~i_clk;
-
-	// --------------------------------------------------
-	//	Tasks
-	// --------------------------------------------------
-		reg		[4*32-1:0] taskState;	// Length is limitted to 32
-	
-		task resetReleaseAfterNCycles;
-			input	[  9:0]		n;
-			begin
-				taskState	= "Reset";
-				i_rstn = 1'b0;
-				#(n*1000/\`CLKFREQ);
-				i_rstn = 1'b1;
-			end
-		endtask
-	
-		task singleCycle;
-			begin
-				#(1000/\`CLKFREQ);
-			end
-		endtask
 
 	// --------------------------------------------------
 	//	Test Stimulus
@@ -185,12 +160,13 @@ snippet	tb
 		integer		i, j;
 		initial begin
 			init();
-			resetReleaseAfterNCycles(4);
+			resetNCycle(4);
 
 			for (i=0; i<\`SIMCYCLE; i++) begin
-
-				#(1000/\`CLKFREQ);
+				vecInsert(i);
+				vecVerify(i);
 			end
+			#(1000/\`CLKFREQ);
 			\$finish;
 		end
 
@@ -203,7 +179,7 @@ snippet	tb
 				\$dumpfile(vcd_file);
 				\$dumpvars;
 			end else begin
-				\$dumpfile("${1:`vim_snippets#Filename('$1', 'name')`}.vcd");
+				\$dumpfile("${3:`vim_snippets#Filename('$1', 'name')`}.vcd");
 				\$dumpvars;
 			end
 		end
