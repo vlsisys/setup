@@ -136,7 +136,7 @@ snippet	tb
 	//	Define Global Variables
 	// --------------------------------------------------
 	\`define	CLKFREQ		100		// Clock Freq. (Unit: MHz)
-	\`define	SIMCYCLE	`NVEC	// Sim. Cycles
+	\`define	SIMCYCLE	\`NVEC	// Sim. Cycles
 	\`define BW_DATA		32		// Bitwidth of ~~
 	\`define BW_ADDR		5		// Bitwidth of ~~
 	\`define BW_CTRL		4		// Bitwidth of ~~
@@ -147,7 +147,7 @@ snippet	tb
 	// --------------------------------------------------
 	\`include	"`expand('%:r:s?_tb??')`.v"
 
-	module	${2:`vim_snippets#Filename('$1', 'name')`};
+	module ${2:`vim_snippets#Filename('$1', 'name')`};
 	// --------------------------------------------------
 	//	DUT Signals & Instantiate
 	// --------------------------------------------------

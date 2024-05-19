@@ -1,31 +1,31 @@
 ""==================================================
 "" Runtime Path for Plug-Ins
 ""==================================================
-"set	rtp+=~/.vim/pack/plugins/start/fzf
-"set	rtp+=~/.vim/pack/plugins/start/tagbar
-"set	rtp+=~/.vim/pack/plugins/start/tabular
-"set	rtp+=~/.vim/pack/plugins/start/gruvbox
-"set	rtp+=~/.vim/pack/plugins/start/ctrlp.vim
-"set	rtp+=~/.vim/pack/plugins/start/nerdtree
-"set	rtp+=~/.vim/pack/plugins/start/syntastic
-"set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
-"set	rtp+=~/.vim/pack/plugins/start/vim-wiki
-"set	rtp+=~/.vim/pack/plugins/start/vim-airline
-"set	rtp+=~/.vim/pack/plugins/start/vim-autoread
-"set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
-"set	rtp+=~/.vim/pack/plugins/start/vim-surround
-"set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
-"set	rtp+=~/.vim/pack/plugins/start/tlib_vim
-"set	rtp+=~/.vim/pack/plugins/start/vim-addon-mw-utils
-"set	rtp+=~/.vim/pack/plugins/start/vim-snippets
-"set	rtp+=~/.vim/pack/plugins/start/vim-snipmate
-"set	rtp+=~/.vim/pack/plugins/start/vim-verilog
+set	rtp+=~/.vim/pack/plugins/start/fzf
+set	rtp+=~/.vim/pack/plugins/start/tagbar
+set	rtp+=~/.vim/pack/plugins/start/tabular
+set	rtp+=~/.vim/pack/plugins/start/gruvbox
+set	rtp+=~/.vim/pack/plugins/start/ctrlp.vim
+set	rtp+=~/.vim/pack/plugins/start/nerdtree
+set	rtp+=~/.vim/pack/plugins/start/syntastic
+set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
+set	rtp+=~/.vim/pack/plugins/start/vim-wiki
+set	rtp+=~/.vim/pack/plugins/start/vim-airline
+set	rtp+=~/.vim/pack/plugins/start/vim-autoread
+set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
+set	rtp+=~/.vim/pack/plugins/start/vim-surround
+set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
+set	rtp+=~/.vim/pack/plugins/start/tlib_vim
+set	rtp+=~/.vim/pack/plugins/start/vim-addon-mw-utils
+set	rtp+=~/.vim/pack/plugins/start/vim-snippets
+set	rtp+=~/.vim/pack/plugins/start/vim-snipmate
+set	rtp+=~/.vim/pack/plugins/start/vim-verilog
 
 ""==================================================
 "" Bundle Configurations
 ""==================================================
 " plugin:nerdtree&tagbar
-let g:NERDTreeWinSize = 22
+let g:NERDTreeWinSize = 18
 let g:Tlist_WinWidth  = 22
 
 " plugin:ctrlp 
