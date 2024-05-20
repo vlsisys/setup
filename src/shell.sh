@@ -15,4 +15,4 @@ sudo	cp -rf 		./fonts/Sudo			/usr/share/fonts/truetype/
 sudo	cp -rf 		./fonts/VictorMono		/usr/share/fonts/truetype/
 sudo	cp -rf 		./fonts/JetBrainsMono	/usr/share/fonts/truetype/
 
-mkdir -p	~/projects
+mkdir -p	~/projects ~/temp

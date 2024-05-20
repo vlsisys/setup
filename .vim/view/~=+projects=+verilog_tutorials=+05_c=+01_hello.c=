@@ -28,14 +28,14 @@ setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal nocursorline
 setlocal cursorlineopt=both
-setlocal define=
+setlocal define=^\\s*#\\s*define
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'systemverilog'
-setlocal filetype=systemverilog
+if &filetype != 'c'
+setlocal filetype=c
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -55,12 +55,12 @@ setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
-setlocal include=
+setlocal include=^\\s*#\\s*include
 setlocal includeexpr=
-setlocal indentexpr=SystemVerilogIndent()
-setlocal indentkeys=!^F,o,O,0),0},=begin,=end,=join,=endcase,=join_any,=join_none,=endmodule,=endfunction,=endtask,=endspecify,=endclass,=endpackage,=endsequence,=endclocking,=endinterface,=endgroup,=endprogram,=endproperty,=endchecker,=`else,=`endif
+setlocal indentexpr=
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal noinfercase
-setlocal iskeyword=@,48-57,63,_,192-255
+setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
 setlocal linebreak
 setlocal nolisp
@@ -75,7 +75,7 @@ setlocal modifiable
 setlocal nrformats=bin,octal,hex
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=
+setlocal omnifunc=ccomplete#Complete
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -98,12 +98,12 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
-setlocal statusline=%!airline#statusline(2)
+setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'systemverilog'
-setlocal syntax=systemverilog
+if &syntax != 'c'
+setlocal syntax=c
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -127,12 +127,12 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 12 - ((11 * winheight(0) + 13) / 26)
+let s:l = 7 - ((6 * winheight(0) + 9) / 18)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 02|
+keepjumps 7
+normal! 021|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

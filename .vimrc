@@ -101,7 +101,8 @@ map <F8>		: w <CR> : !ivg	%:r:s?_tb??<CR><CR>
 map <F9>		: w <CR> : !iv	%:r:s?_tb??<CR><CR>
 
 map <F11>		: w <CR> : !python3 %<CR><CR>
-map <F12>		: w <CR> : !clear; gcc -g -Wall %:t -o %:t:r && ./%:t:r<CR>
+map <F12>		: w <CR> : !clear; riscv64-unknown-linux-gnu-gcc -march=rv32imac -mabi=ilp32 -g -Wall %:t -o %:t:r && ./%:t:r<CR>
+"map <F12>		: w <CR> : !clear; gcc -g -Wall %:t -o %:t:r && ./%:t:r<CR>
 "map <F11>		: VimwikiAll2HTML<CR>
 "map <F12>		: %!xxd<CR>
 map <C-LEFT>	: tabprev<CR>
@@ -122,7 +123,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 26
+set guifont=Victor\ Mono\ 21
 "set lines=32
 "set columns=100
 set linespace=2
