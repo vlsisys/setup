@@ -26,7 +26,7 @@ set	rtp+=~/.vim/pack/plugins/start/vim-verilog
 ""==================================================
 " plugin:nerdtree&tagbar
 let g:NERDTreeWinSize = 18
-let g:Tlist_WinWidth  = 22
+let g:Tlist_WinWidth  = 18
 
 " plugin:ctrlp 
 let g:ctrlp_map = '<c-p>'
@@ -77,7 +77,7 @@ autocmd	FileType * setlocal comments-=://
 "==================================================
 " Map Setting
 "==================================================
-nmap ,s			: w<CR> :source ~/.vimrc<CR> :source ~/.vim/pack/plugins/start/vim-verilog/autoload/verilog.vim <CR>
+nmap ,s			: w<CR> :source ~/.vimrc<CR> :source ~/.vim/pack/plugins/start/vim-verilog/autoload/verilog.vim<CR> :noh<CR>
 nmap ,v			: e      ~/.vimrc<CR>
 nmap ,b			: e      ~/.bash_aliases<CR>
 nmap ,t			: !cd ~/projects;ctags -R<CR><CR>
@@ -123,7 +123,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 21
+set guifont=Victor\ Mono\ 26
 "set lines=32
 "set columns=100
 set linespace=2
