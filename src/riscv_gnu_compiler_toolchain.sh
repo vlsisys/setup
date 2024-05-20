@@ -12,4 +12,4 @@ git clone https://github.com/riscv/riscv-gnu-toolchain
 cd riscv-gnu-toolchain
 mkdir -p build; cd build
 ../configure --prefix=$HOME/utils/riscv --enable-multilib
-make
+make linux
