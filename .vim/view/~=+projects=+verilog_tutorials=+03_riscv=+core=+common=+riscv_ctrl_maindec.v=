@@ -49,7 +49,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croqlm1
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
@@ -98,7 +98,7 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
-setlocal statusline=%!airline#statusline(3)
+setlocal statusline=%!airline#statusline(2)
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
@@ -127,12 +127,12 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 43 - ((30 * winheight(0) + 16) / 32)
+let s:l = 11 - ((6 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 43
-normal! 029|
+keepjumps 11
+normal! 04|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

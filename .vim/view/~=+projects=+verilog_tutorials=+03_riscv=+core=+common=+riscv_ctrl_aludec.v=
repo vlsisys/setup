@@ -49,7 +49,7 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croqlm1
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
@@ -127,12 +127,12 @@ setlocal nowrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 17 - ((7 * winheight(0) + 8) / 17)
+let s:l = 22 - ((12 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 17
-normal! 02|
+keepjumps 22
+normal! 036|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

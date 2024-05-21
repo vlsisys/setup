@@ -256,8 +256,6 @@ function! verilog#VInst(printOpt)
 
 	endif
 
-
-
-	exe	printf(":.normal o%s", l:lines)
+	exe	printf(":.normal i%s", l:lines)
 
 endfunction

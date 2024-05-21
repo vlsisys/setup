@@ -26,7 +26,7 @@ set	rtp+=~/.vim/pack/plugins/start/vim-verilog
 ""==================================================
 " plugin:nerdtree&tagbar
 let g:NERDTreeWinSize = 18
-let g:Tlist_WinWidth  = 18
+let g:Tlist_WinWidth  = 22
 
 " plugin:ctrlp 
 let g:ctrlp_map = '<c-p>'
@@ -38,7 +38,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 0
+let g:syntastic_auto_loc_list            = 1
 let g:syntastic_check_on_open            = 0
 let g:syntastic_check_on_wq              = 1
 let g:syntastic_error_symbol             = 'E'
@@ -77,12 +77,13 @@ autocmd	FileType * setlocal comments-=://
 "==================================================
 " Map Setting
 "==================================================
-nmap ,s			: w<CR> :source ~/.vimrc<CR> :source ~/.vim/pack/plugins/start/vim-verilog/autoload/verilog.vim<CR> :noh<CR>
+nmap ,s			: w<CR> :source ~/.vimrc<CR> :source ~/.vim/pack/plugins/start/vim-verilog/autoload/verilog.vim <CR> :noh<CR>
 nmap ,v			: e      ~/.vimrc<CR>
 nmap ,b			: e      ~/.bash_aliases<CR>
 nmap ,t			: !cd ~/projects;ctags -R<CR><CR>
 nmap ,1			: e      ~/.vim/pack/plugins/start/vim-snippets/snippets/verilog.snippets<CR>
 nmap ,2			: e      ~/.vim/pack/plugins/start/vim-snippets/snippets/c.snippets<CR>
+nmap ,3			: e      ~/.vim/pack/plugins/start/vim-verilog/autoload/verilog.vim<CR>
 nmap ,q			: q<CR>
 nmap ,w			: w<CR>
 nmap ,rm		: %s///g<CR>
@@ -123,7 +124,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 26
+set guifont=Victor\ Mono\ 24
 "set lines=32
 "set columns=100
 set linespace=2
@@ -298,5 +299,4 @@ imap <F6>   <Esc>:call SwitchColor(1)<CR>
 
  map <S-F6>      :call SwitchColor(-1)<CR>
 imap <S-F6> <Esc>:call SwitchColor(-1)<CR>
-
 
