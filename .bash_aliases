@@ -22,6 +22,8 @@ alias	gitpush='git add .; git commit -m 'comment'; git push -u origin +master;'
 alias	ipy2py='jupyter nbconvert --to python $1'
 alias	untar='tar -xvf $1'
 alias	untargz='tar -zxvf $1'
+alias	rvgdb='riscv64-unknown-linux-gnu-gdb $1'
+alias	rvdump='riscv64-unknown-linux-gnu-objdump -S $1'
 
 # ----------------------------------------------
 # [Functions]
@@ -57,3 +59,23 @@ function	iv(){
 export	-f ivg
 export	-f iv
 
+function	rvgcc(){
+	echo '======================================================================'
+	echo ' RISC-V GNU GCC'
+	echo '======================================================================'
+	riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=ilp32  -Ttext=0x0000 -c -o test $1
+#	riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=ilp32 -Ttext=0 -nostdlib test.c -o test
+	riscv64-unknown-linux-gnu-objdump -d test > test.dump
+	riscv64-unknown-linux-gnu-objcopy -O ihex test test.hex
+	srec_cat test.hex -binary -o test.mif -mif
+	#riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=ilp32 -c -o start.o start.S
+	#riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=ilp32 -c -o $1.o $1
+	##riscv64-unknown-linux-gnu-ld  $1.o start.o -L riscv64-unknown-linux-gnu/lib/ -Tlink.ld -static -o $1.elf
+	#riscv64-unknown-linux-gnu-ld  -march=rv32i -mabi=elf32briscv_ilp32 $1.o start.o -L riscv64-unknown-linux-gnu/lib/ -Tlink.ld -static -o $1.elf
+	#riscv64-unknown-linux-gnu-objcopy -O binary $1.elf $1.bin
+	#riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=ilp32 -nostdlib -o $1.o $1 ctr0local.S -lgcc
+	#riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -nostdlib -o test test.c crt0local.S -lgcc
+	#riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=ilp32 -o test test.c ./crt0local.S -lgcc
+	#-march=rv32i -mabi=ilp32 -o $1.o $1 ctr0local.S -lgcc
+
+}
