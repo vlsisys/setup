@@ -38,7 +38,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
+let g:syntastic_auto_loc_list            = 0
 let g:syntastic_check_on_open            = 0
 let g:syntastic_check_on_wq              = 1
 let g:syntastic_error_symbol             = 'E'
@@ -125,7 +125,7 @@ colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 30
+set guifont=Victor\ Mono\ 32
 "set lines=32
 "set columns=100
 set linespace=2
