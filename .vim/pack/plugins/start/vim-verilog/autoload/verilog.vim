@@ -57,7 +57,7 @@ function! verilog#VInst(printOpt)
 	endfor
 
 	" Variable Initialization
-	let	l:maxTapNum = max([4, float2nr(ceil(l:maxStrLen/4.0))])
+	let	l:maxTapNum = max([5, float2nr(ceil(l:maxStrLen/4.0))])
 	let	l:lines = "\t"
 
 	" Define Local Parameters
