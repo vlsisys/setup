@@ -61,25 +61,38 @@ function! verilog#VInst(printOpt)
 	let	l:lines = "\t"
 
 	" Define Local Parameters
-	if(len(l:paramList))
-		for	l:aKey in l:paramList
-			let	l:keyTabNum	= len(".".l:aKey)/4.0
-			let	l:keyTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:keyTabNum)))
-			let	l:lines = l:lines . printf("localparam\t%s%s= %s;\r", l:aKey, l:keyTabStr, l:paramDict[aKey])
-		endfor
-		let	l:lines = l:lines . printf("\r")
-	endif
+	"if(len(l:paramList))
+	"	for	l:aKey in l:paramList
+	"		let	l:keyTabNum	= len(".".l:aKey)/4.0
+	"		let	l:keyTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:keyTabNum)))
+	"		let	l:lines = l:lines . printf("localparam\t%s%s= %s;\r", l:aKey, l:keyTabStr, l:paramDict[aKey])
+	"	endfor
+	"	let	l:lines = l:lines . printf("\r")
+	"endif
 
 	" Signals for TestBench (output -> wire, input -> reg)
 	if(a:printOpt == 1)
 		for	l:aLine in l:portLineList
 			let	l:aLineOrig	= l:aLine
-			let	l:aLine	= substitute(l:aLine , '\s\+output\s\+reg' , 'wire' , '')
-			let	l:aLine	= substitute(l:aLine , '\s\+output\t'      , 'wire' , '')
-			let	l:aLine	= substitute(l:aLine , '\s\+inout'         , 'reg'  , '')
-			let	l:aLine	= substitute(l:aLine , '\s\+input'         , 'reg'  , '')
-			let	l:aLine	= substitute(l:aLine , 'BW'                , '`BW'  , '')
-			let	l:aLine	= substitute(l:aLine , ','                 , ';' , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+output\s\+reg' , 'wire\t' , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+output\t'      , 'wire'   , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+inout'         , 'reg'    , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+input'         , 'reg'    , '')
+			let	l:aLine	= substitute(l:aLine , ','                 , ';'      , '')
+   			if(l:aLineOrig != l:portLineList[-1])
+				let	l:lines = l:lines . printf("%s\r", l:aLine)
+			else
+				let	l:lines = l:lines . printf("%s;\r\r", l:aLine)
+			endif
+		endfor
+	else
+		for	l:aLine in l:portLineList
+			let	l:aLineOrig	= l:aLine
+			let	l:aLine	= substitute(l:aLine , '\s\+output\s\+reg' , 'wire\t' , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+output'        , 'wire'   , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+inout'         , 'wire'   , '')
+			let	l:aLine	= substitute(l:aLine , '\s\+input'         , 'wire'   , '')
+			let	l:aLine	= substitute(l:aLine , ','                 , ';'      , '')
    			if(l:aLineOrig != l:portLineList[-1])
 				let	l:lines = l:lines . printf("%s\r", l:aLine)
 			else
@@ -99,10 +112,10 @@ function! verilog#VInst(printOpt)
 			let	l:valTabStr	= repeat("\t", float2nr(ceil(l:maxTapNum - l:valTabNum)))
 			if(l:aKey != l:paramList[-1])
 				"let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
-				let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, "`".l:aKey, l:keyTabStr)
+				let	l:lines = l:lines . printf(".%s%s(%s%s),\r", l:aKey, l:keyTabStr, l:aKey, l:keyTabStr)
 			else
 				"let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, l:paramDict[aKey], l:valTabStr)
-				let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, "`".l:aKey, l:keyTabStr)
+				let	l:lines = l:lines . printf(".%s%s(%s%s)\r)\r", l:aKey, l:keyTabStr, l:aKey, l:keyTabStr)
 			endif
 		endfor
 		let	l:lines = l:lines . printf("u_%s(\r", l:moduleName)

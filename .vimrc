@@ -1,25 +1,4 @@
 "==================================================
-" Runtime Path for Plug-Ins
-"==================================================
-set	rtp+=~/.vim/pack/plugins/start/fzf
-set	rtp+=~/.vim/pack/plugins/start/tagbar
-set	rtp+=~/.vim/pack/plugins/start/tabular
-set	rtp+=~/.vim/pack/plugins/start/gruvbox
-set	rtp+=~/.vim/pack/plugins/start/nerdtree
-set	rtp+=~/.vim/pack/plugins/start/syntastic
-set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
-set	rtp+=~/.vim/pack/plugins/start/vim-wiki
-set	rtp+=~/.vim/pack/plugins/start/vim-airline
-set	rtp+=~/.vim/pack/plugins/start/vim-autoread
-set	rtp+=~/.vim/pack/plugins/start/vim-surround
-set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
-set	rtp+=~/.vim/pack/plugins/start/tlib_vim
-set	rtp+=~/.vim/pack/plugins/start/vim-addon-mw-utils
-set	rtp+=~/.vim/pack/plugins/start/vim-snippets
-set	rtp+=~/.vim/pack/plugins/start/vim-snipmate
-set	rtp+=~/.vim/pack/plugins/start/vim-verilog
-
-"==================================================
 " Bundle Configurations
 "==================================================
 " gruvbox
@@ -30,29 +9,25 @@ set	termguicolors
 colorscheme	gruvbox
 
 " plugin:nerdtree&tagbar
-let g:NERDTreeWinSize = 18
-let g:Tlist_WinWidth  = 22
+let g:NERDTreeWinSize = 20
+let g:Tlist_WinWidth  = 20
 
 " plugin:syntastic
 imap <C-J> <Plug>snipMateNextOrTrigger
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 0
-let g:syntastic_check_on_open            = 0
-let g:syntastic_check_on_wq              = 1
-let g:syntastic_error_symbol             = 'E'
-let g:syntastic_warning_symbol           = 'W'
-let g:syntastic_loc_list_height          = 4
-let g:syntastic_verilog_checkers         = ['iverilog']
-let g:syntastic_python_checkers          = ['python3']
-let g:syntastic_cpp_compiler             = 'g++'
-let g:syntastic_cpp_compiler_options     = '-std=c++14'
-
-" plugin: fzf
-let g:fzf_vim		= {}
-let g:fzf_layout	= { 'window': { 'width': 0.8, 'height': 0.4,'yoffset':0.5,'xoffset': 0.5 } }
+let	g:syntastic_always_populate_loc_list = 1
+let	g:syntastic_auto_loc_list            = 0
+let	g:syntastic_check_on_open            = 0
+let	g:syntastic_check_on_wq              = 1
+let	g:syntastic_error_symbol             = 'E'
+let	g:syntastic_warning_symbol           = 'W'
+let	g:syntastic_loc_list_height          = 4
+let	g:syntastic_verilog_checkers         = ['iverilog']
+let	g:syntastic_python_checkers          = ['python3']
+let	g:syntastic_cpp_compiler             = 'g++'
+let	g:syntastic_cpp_compiler_options     = '-std=c++14'
 
 "==================================================
 " Basic Setting
@@ -71,6 +46,7 @@ augroup remember_folds
 	autocmd BufWinEnter *.* silent! loadview
 augroup END
 autocmd	FileType * setlocal comments-=://
+
 "==================================================
 " Map Setting
 "==================================================
@@ -84,9 +60,9 @@ nmap ,3			: e      ~/.vim/pack/plugins/start/vim-verilog/autoload/verilog.vim<CR
 nmap ,q			: q<CR>
 nmap ,w			: w<CR>
 nmap ,rm		: %s///g<CR>
+nmap ga			: Tabularize /
 
 map ,n			: noh<CR>
-map ,aa			: Tabularize /
 map ,,i			: call verilog#VInst(0)<CR>
 map ,,t			: call verilog#VInst(1)<CR>
 
@@ -118,7 +94,6 @@ map <C-n>		: tabnew<CR>
 "==================================================
 " Visual Setting
 "==================================================
-colorscheme gruvbox
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
@@ -210,23 +185,10 @@ au BufReadPost *
  \ if line("'\"") > 0 && line("\"") <= line("$") |
  \   exe "normal g`\"" |
  \ endif
+
 "==================================================
 " Functions
 "==================================================
-
-function! DisableItalic()
-	let his = ''
-	redir => his
-	silent hi
-	redir END
-	let his = substitute(his, '\n\s\+', ' ', 'g')
-	for line in split(his, "\n")
-		if line !~ ' links to ' && line !~ ' cleared$'
-			exe 'hi' substitute(substitute(line, ' xxx ', ' ', ''), 'italic', 'none', 'g')
-		endif
-	endfor
-endfunction
-
 function! FontSizePlus ()
     let l:gf_size_whole = matchstr(&guifont, '\(:h\)\@<=\d\+$')
     let l:gf_size_whole = l:gf_size_whole + 1
@@ -242,7 +204,6 @@ function! FontSizeMinus ()
 endfunction
 
 if has("gui_running")
-    nmap zi :call DisableItalic()<CR>
     nmap z[ :call FontSizeMinus()<CR>
     nmap z] :call FontSizePlus()<CR>
 endif
