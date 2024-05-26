@@ -1,18 +1,16 @@
-""==================================================
-"" Runtime Path for Plug-Ins
-""==================================================
+"==================================================
+" Runtime Path for Plug-Ins
+"==================================================
 set	rtp+=~/.vim/pack/plugins/start/fzf
 set	rtp+=~/.vim/pack/plugins/start/tagbar
 set	rtp+=~/.vim/pack/plugins/start/tabular
 set	rtp+=~/.vim/pack/plugins/start/gruvbox
-set	rtp+=~/.vim/pack/plugins/start/ctrlp.vim
 set	rtp+=~/.vim/pack/plugins/start/nerdtree
 set	rtp+=~/.vim/pack/plugins/start/syntastic
 set	rtp+=~/.vim/pack/plugins/start/AutoComplPop
 set	rtp+=~/.vim/pack/plugins/start/vim-wiki
 set	rtp+=~/.vim/pack/plugins/start/vim-airline
 set	rtp+=~/.vim/pack/plugins/start/vim-autoread
-set	rtp+=~/.vim/pack/plugins/start/vim-floaterm
 set	rtp+=~/.vim/pack/plugins/start/vim-surround
 set	rtp+=~/.vim/pack/plugins/start/vim-indent-guides
 set	rtp+=~/.vim/pack/plugins/start/tlib_vim
@@ -21,16 +19,19 @@ set	rtp+=~/.vim/pack/plugins/start/vim-snippets
 set	rtp+=~/.vim/pack/plugins/start/vim-snipmate
 set	rtp+=~/.vim/pack/plugins/start/vim-verilog
 
-""==================================================
-"" Bundle Configurations
-""==================================================
+"==================================================
+" Bundle Configurations
+"==================================================
+" gruvbox
+set	background=dark
+let	g:gruvbox_contrast_dark='soft'
+let	g:gruvbox_italic=0
+set	termguicolors
+colorscheme	gruvbox
+
 " plugin:nerdtree&tagbar
 let g:NERDTreeWinSize = 18
 let g:Tlist_WinWidth  = 22
-
-" plugin:ctrlp 
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 
 " plugin:syntastic
 imap <C-J> <Plug>snipMateNextOrTrigger
@@ -49,14 +50,9 @@ let g:syntastic_python_checkers          = ['python3']
 let g:syntastic_cpp_compiler             = 'g++'
 let g:syntastic_cpp_compiler_options     = '-std=c++14'
 
-" plugin:tabular
-let mapleader=','
-if exists(":Tabularize")
-	nmap <Leader>a= :Tabularize /=<CR>
-	vmap <Leader>a= :Tabularize /=<CR>
-	nmap <Leader>a: :Tabularize /:\zs<CR>
-	vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
+" plugin: fzf
+let g:fzf_vim		= {}
+let g:fzf_layout	= { 'window': { 'width': 0.8, 'height': 0.4,'yoffset':0.5,'xoffset': 0.5 } }
 
 "==================================================
 " Basic Setting
@@ -67,6 +63,7 @@ set	viewdir=~/.vim/view
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
+set guioptions-=L
 set	tags=~/projects/tags
 augroup remember_folds
 	autocmd!
