@@ -60,7 +60,8 @@ nmap ,3			: e      ~/.vim/pack/plugins/start/vim-verilog/autoload/verilog.vim<CR
 nmap ,q			: q<CR>
 nmap ,w			: w<CR>
 nmap ,rm		: %s///g<CR>
-nmap ga			: Tabularize /
+
+map ga			: Tabularize /
 
 map ,n			: noh<CR>
 map ,,i			: call verilog#VInst(0)<CR>
@@ -97,7 +98,7 @@ map <C-n>		: tabnew<CR>
 syntax  on
 "set guifont=Sudo\ 18
 "set guifont=Jetbrains\ Mono\ 16
-set guifont=Victor\ Mono\ 21
+set guifont=Victor\ Mono\ 24
 "set lines=32
 "set columns=100
 set linespace=2
