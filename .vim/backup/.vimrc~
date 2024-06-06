@@ -49,7 +49,7 @@ set	numberwidth=4					" Sets the width of the line number on the left side of th
 set	relativenumber					" Show line numbers relative to cursor position
 set	ruler							" Show cursor position information in the status line
 set	shiftwidth=4					" Specifies the indent length used by cindent, <<, >>. The default is 8
-set showbreak=+++\
+set showbreak=+++++++++\
 set	showcmd							" In NORMAL mode, it shows the command you are typing in the lower right corner of the screen
 set	showmatch						" Highlight matching parentheses. Defaults to off
 set	showtabline=1					" 0: X, 1: default, 2: always
