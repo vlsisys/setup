@@ -2,7 +2,7 @@
 " Basic Setting: Visual
 "==================================================
 set	background=dark				" Can only be set to one of two values: dark, light
-set cmdheight=2					" Number of screen lines to use for the command-line
+set cmdheight=1					" Number of screen lines to use for the command-line
 set	nocursorcolumn				" Highlights the column where the cursor is located
 set	cursorline					" Highlight the line where the cursor is
 set guioptions-=m
@@ -10,11 +10,11 @@ set guioptions-=T
 set guioptions-=l
 set guioptions-=r
 set guioptions-=b				"m: menu, T: toolbar, l,r,b: scrollbar
-set guifont=Victor\ Mono\ Light\ 20
+set guifont=Victor\ Mono\ Light\ 28
 set laststatus=2				" Set whether or not to display a status line in the last window
 set lazyredraw					" The screen does not update when you are in the middle of an action (such as a macro)
 set linebreak					" Lines are truncated on a word-by-word basis
-set linespace=0					" Set the distance between rows, default is 0
+set linespace=8					" Set the distance between rows, default is 0
 set	number						" Shows the line number on the left side of the screen
 set	numberwidth=4				" Sets the width of the line number on the left side of the screen. The default is 4
 set	relativenumber				" Show line numbers relative to cursor position
@@ -53,7 +53,7 @@ syntax on						" Turn syntax highlighting on.
 
 set	tags=~/projects/tags
 
-set noautochdir					" Automatically change the working directory when opening files, moving buffers, etc
+set autochdir					" Automatically change the working directory when opening files, moving buffers, etc
 set	autoindent					" When you type Enter in INSERT mode to go down to the next line, it will automatically indent for you
 set	autoread					" If the contents of a file change outside of VIM, it is automatically re-read
 set	noautowrite					" Automatically saves files whenever you run certain commands with changes
@@ -63,7 +63,7 @@ set	backupdir=~/.vim/backup
 set	cindent						" Automatically apply C-style indentation when editing
 set	clipboard=unnamed			" Associating the unnamed register with the clipboard where all copy/delete operations are entered
 set	nocompatible				" Sets the compatibility with the VI
-set	complete
+"set	complete
 set confirm						" Get confirmation from the user when using commands like :q, :bd, etc
 set	noexpandtab					" When you press the tab key, you enter a set number of spaces, not tabs
 set	tabstop=4					" Sets how many <Tab>s are replaced by <Space>s. The default is 0.

@@ -41,8 +41,8 @@ function	ivg(){
 	vvp	$1.vvp +vcd_file=./vcd/$1.vcd > ./log/$1.log
 	rm $1.vvp
 	gtkwave -f ./vcd/$1.vcd -T ~/utils/scripts/gtkwv.tcl &
-	if [ -f $1_tb.f ]; then
-		iverilog -o $1.vvp -c $1_tb.f
+	if [ -f $1.f ]; then
+		iverilog -o $1.vvp -c $1.f
 	else
 		iverilog -o $1.vvp timescale.v $1_tb.v
 	fi
@@ -55,11 +55,7 @@ function	iv(){
 	rm -rf vcd log
 	mkdir -p vcd log
 	ln -fs ~/templates/verilog/timescale.v timescale.v 
-	if [ -f $1_tb.f ]; then
-		iverilog -o $1.vvp -c $1_tb.f
-	else
-		iverilog -o $1.vvp timescale.v $1_tb.v
-	fi
+	iverilog -o $1.vvp -c $1.f
 	vvp	$1.vvp +vcd_file=./vcd/$1.vcd > ./log/$1.log
 	rm $1.vvp
 }
