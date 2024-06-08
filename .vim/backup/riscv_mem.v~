@@ -5,7 +5,9 @@
 //	* Description	: 
 // ==================================================
 
-`include	"riscv_configs.v"
+`ifndef	DELINC
+	`include	"riscv_configs.v"
+`endif
 
 module riscv_mem
 #(	

@@ -4,7 +4,7 @@
 set	background=dark				" Can only be set to one of two values: dark, light
 set cmdheight=1					" Number of screen lines to use for the command-line
 set	nocursorcolumn				" Highlights the column where the cursor is located
-set	cursorline					" Highlight the line where the cursor is
+set	nocursorline				" Highlight the line where the cursor is
 set guioptions-=m
 set guioptions-=T
 set guioptions-=l
@@ -34,7 +34,7 @@ set listchars+=trail:·			" Represent tabs as ` and spaces, and trailing blanks 
 set	nolist	
 set	wildmenu					" Extend command-line autocomplete to make it more convenient
 set	wildmode=list:full			" wildmenu display option
-set	viewdir=~/.vim/view
+set	viewdir=~/.vim/view			" Directory for vim view file
 
 augroup remember_folds
 	autocmd!
@@ -72,8 +72,8 @@ set	nogdefault					" Setting the g-flag to default when using the :substitute co
 set	hlsearch					" In the search results, highlight the string that matches the search term
 set	history=50					" Remembers the history of the command by the specified number
 set	ignorecase					" Ignore case when searching (you can search in lowercase as well as uppercase)
-set	smartcase					" Don't ignore case if the search term contains capital letters
 set	incsearch					" /search to perform a search for each letter entered
+set	smartcase					" Don't ignore case if the search term contains capital letters
 set	matchpairs+=<:>				" Specifies the pair of parentheses to move to %
 set	mouse=a						" Set mouse usage by mode
 set	nomousehide					" Hide the mouse pointer while typing
@@ -89,7 +89,7 @@ set	visualbell					" Notify you on screen when an error occurs without beeping
 set	background=dark
 "let	g:gruvbox_contrast_dark='soft'
 "let	g:gruvbox_contrast_dark='hard'
-let	g:gruvbox_italic=0
+let	g:gruvbox_italic=1
 set	termguicolors
 colorscheme	gruvbox
 
@@ -116,8 +116,8 @@ let	g:syntastic_cpp_compiler_options     = '-std=c++14'
 imap <C-J> <Plug>snipMateNextOrTrigger
 
 " for indent conflict during verilog coding
-autocmd	FileType * setlocal comments-=://
-set	formatoptions-=r
+"autocmd	FileType * setlocal comments-=://
+"set	formatoptions-=r
 
 "==================================================
 " Map Setting
