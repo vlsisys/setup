@@ -4,16 +4,14 @@
 //	* Filename		: riscv_datapath.v
 //	* Description	: 
 // ==================================================
-
 `ifndef	DELINC
-	`include	"../common/riscv_alu.v"
-	`include	"../common/riscv_configs.v"
-	`include	"../common/riscv_dff.v"
-	`include	"../common/riscv_immext.v"
-	`include	"../common/riscv_mem.mif"
-	`include	"../common/riscv_mem.v"
-	`include	"../common/riscv_mem_tb.v"
-	`include	"../common/riscv_regfile.v"
+	`include	"/home/woong/projects/verilog_tutorials/03_riscv/core/common/riscv_alu.v"
+	`include	"/home/woong/projects/verilog_tutorials/03_riscv/core/common/riscv_configs.v"
+	`include	"/home/woong/projects/verilog_tutorials/03_riscv/core/common/riscv_dff.v"
+	`include	"/home/woong/projects/verilog_tutorials/03_riscv/core/common/riscv_dff_enabled.v"
+	`include	"/home/woong/projects/verilog_tutorials/03_riscv/core/common/riscv_immext.v"
+	`include	"/home/woong/projects/verilog_tutorials/03_riscv/core/common/riscv_mem.v"
+	`include	"/home/woong/projects/verilog_tutorials/03_riscv/core/common/riscv_regfile.v"
 `endif
 
 module riscv_datapath
@@ -23,7 +21,8 @@ module riscv_datapath
 	parameter	BW_CTRL			= 4
 )
 (	
-	output reg	[BW_DATA-1:0]	o_data,
+	output reg	[BW_DATA-1:0]	o_dp_mem_addr,
+	output reg	[BW_DATA-1:0]	o_dp_mem_data,
 	output reg					o_valid,
 	input		[BW_DATA-1:0]	i_data,
 	input		[BW_ADDR-1:0]	i_addr,
@@ -32,131 +31,22 @@ module riscv_datapath
 	input						i_rstn
 );
 
-	wire		[BW_DATA-1:0]	o_reg_rd_data0;
-	wire		[BW_DATA-1:0]	o_reg_rd_data1;
-	wire		[BW_ADDR-1:0]	i_reg_rd_addr0;
-	wire		[BW_ADDR-1:0]	i_reg_rd_addr1;
-	wire		[BW_DATA-1:0]	i_reg_wr_data;
-	wire		[BW_ADDR-1:0]	i_reg_wr_addr;
-	wire						i_reg_wr_en;
-
 	wire		[BW_DATA-1:0]	o_dff_q;
 	wire		[BW_DATA-1:0]	i_dff_d;
-
-	wire		[BW_DATA-1:0]	o_imm_ext;
-	wire		[BW_DATA-1:0]	i_imm_instr;
-	wire		[BW_CTRL-1:0]	i_imm_src;
-
-	wire		[BW_DATA-1:0]	o_alu_result;
-	wire						o_alu_zero;
-	wire		[BW_DATA-1:0]	i_alu_a;
-	wire		[BW_DATA-1:0]	i_alu_b;
-	wire		[BW_CTRL-1:0]	i_alu_ctrl;
+	wire						i_en;
 
 	//	PCNext -> PC
-	riscv_dff
+	riscv_dff_enabled
 	#(
 		.BW_DATA			(BW_DATA			)
 	)
-	u_riscv_dff_pc(
+	u_riscv_dff_enabled_pc(
 		.o_dff_q			(o_dff_q			),
 		.i_dff_d			(i_dff_d			),
+		.i_en				(i_en				),
 		.i_clk				(i_clk				),
 		.i_rstn				(i_rstn				)
 	);
-
-	//	Instruction Fetch: Unified Memory -> Instruction
-	riscv_dff
-	#(
-		.BW_DATA			(BW_DATA			)
-	)
-	u_riscv_dff_instr_fetch(
-		.o_dff_q			(o_dff_q			),
-		.i_dff_d			(i_dff_d			),
-		.i_clk				(i_clk				),
-		.i_rstn				(i_rstn				)
-	);
-
-	// unified memory for instruction & data
-	riscv_mem
-	#(
-		.BW_DATA			(BW_DATA			),
-		.BW_ADDR			(BW_ADDR			),
-		.INIT_FILE			(INIT_FILE			)
-	)
-	u_riscv_mem(
-		.o_mem_data			(o_mem_data			),
-		.i_mem_data			(i_mem_data			),
-		.i_mem_addr			(i_mem_addr			),
-		.i_mem_wr_en		(i_mem_wr_en		),
-		.i_clk				(i_clk				)
-	);
-
-	riscv_regfile
-	#(
-		.BW_DATA			(BW_DATA			),
-		.BW_ADDR			(BW_ADDR			)
-	)
-	u_riscv_regfile(
-		.o_reg_rd_data0		(o_reg_rd_data0		),
-		.o_reg_rd_data1		(o_reg_rd_data1		),
-		.i_reg_rd_addr0		(i_reg_rd_addr0		),
-		.i_reg_rd_addr1		(i_reg_rd_addr1		),
-		.i_reg_wr_data		(i_reg_wr_data		),
-		.i_reg_wr_addr		(i_reg_wr_addr		),
-		.i_reg_wr_en		(i_reg_wr_en		),
-		.i_clk				(i_clk				),
-		.i_rstn				(i_rstn				)
-	);
-
-	//	Register File --> ALU
-	riscv_dff
-	#(
-		.BW_DATA			(BW_DATA			)
-	)
-	u_riscv_dff_rf(
-		.o_dff_q			(o_dff_q			),
-		.i_dff_d			(i_dff_d			),
-		.i_clk				(i_clk				),
-		.i_rstn				(i_rstn				)
-	);
-
-	riscv_immext
-	#(
-		.BW_DATA			(BW_DATA			),
-		.BW_CTRL			(BW_CTRL			)
-	)
-	u_riscv_immext(
-		.o_imm_ext			(o_imm_ext			),
-		.i_imm_instr		(i_imm_instr		),
-		.i_imm_src			(i_imm_src			)
-	);
-
-	riscv_alu
-	#(
-		.BW_DATA			(BW_DATA			),
-		.BW_CTRL			(BW_CTRL			)
-	)
-	u_riscv_alu(
-		.o_alu_result		(o_alu_result		),
-		.o_alu_zero			(o_alu_zero			),
-		.i_alu_a			(i_alu_a			),
-		.i_alu_b			(i_alu_b			),
-		.i_alu_ctrl			(i_alu_ctrl			)
-	);
-
-	//	ALU Result
-	riscv_dff
-	#(
-		.BW_DATA			(BW_DATA			)
-	)
-	u_riscv_dff_alu(
-		.o_dff_q			(o_dff_q			),
-		.i_dff_d			(i_dff_d			),
-		.i_clk				(i_clk				),
-		.i_rstn				(i_rstn				)
-	);
-
 
 
 
