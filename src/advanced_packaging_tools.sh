@@ -18,7 +18,7 @@ sudo apt-get -y install cmake clang universal-ctags
 sudo apt-get -y install autoconf automake autotools-dev curl ninja-build git gdb
 sudo apt-get -y install bison flex texinfo gperf libtool patchutils bc zlib1g-dev
 sudo apt-get -y install libmpc-dev libmpfr-dev libgmp-dev libexpat-dev libglib2.0-dev libslirp-dev libusb-1.0-0-dev device-tree-compiler pkg-config
-#sudo apt-get -y install yosys gv
+sudo apt-get -y install yosys gv
 
 # --------------------------------------------------
 # [Verilog Dev. Environment]
