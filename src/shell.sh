@@ -5,11 +5,11 @@ echo '=============================='
 # --------------------------------------------------
 # [Bash Environment Setup]
 # --------------------------------------------------
-cp -rf 		./utils				~	
-cp -rf 		./templates			~	
-cp -rf 		./.bash_aliases		~	
-cp -rf 		./.vimrc			~	
-cp -rf 		./.vim				~	
+ln -s 		./utils				~/utils				
+ln -s 		./templates			~/templates			
+ln -s 		./.vim				~/.vim				
+ln -s  		./.bash_aliases		~/.bash_aliases		
+ln -s  		./.vimrc			~/.vimrc			
 
 sudo	cp -rf 		./fonts/Sudo			/usr/share/fonts/truetype/
 sudo	cp -rf 		./fonts/VictorMono		/usr/share/fonts/truetype/

@@ -4,7 +4,7 @@
 export	PATH=$PATH:$HOME/utils/riscv/toolchain/bin:$HOME/utils/riscv/bin/
 
 export	PS1="[\[\e[0;36m\]\u - \[\e[0;37m\]\D{%Y.%m.%d} \t\[\e[0;39m\]]\n\[\e[0;31m\]\${PWD}: \[\e[0;39m\]"
-export	DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+#export	DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export	GDK_SCALE=1
 #source	/opt/pkg/petalinux-v2021.1/settings.sh
 #source	/tools/Xilinx/Vivado/2020.2/settings64.sh
@@ -24,6 +24,8 @@ alias	untar='tar -xvf $1'
 alias	untargz='tar -zxvf $1'
 alias	rvgdb='riscv64-unknown-linux-gnu-gdb $1'
 alias	rvdump='riscv64-unknown-linux-gnu-objdump -S $1'
+alias	vg='source ~/venv/gem5/bin/activate'
+alias	gem5='~/projects/gem5/build/RISCV/gem5.opt $1'
 
 # ----------------------------------------------
 # [Functions]
