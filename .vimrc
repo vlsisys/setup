@@ -159,7 +159,8 @@ map <F5>		:TagbarToggle<CR>
 map <F8>		:w <CR> :!ivg	%:r:s?_tb??<CR><CR>
 map <F9>		:w <CR> :!iv	%:r:s?_tb??<CR><CR>
 
-map <F11>		: w <CR> : !python3 %<CR><CR>
+"map <F11>		: w <CR> : !python3 %<CR><CR>
+map <F11>		: w <CR> : !gem5 %:r<CR><CR>
 map <F12>		: w <CR> : !clear; riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=ilp32 -g -Wall %:t -o %:t:r <CR>
 "map <F12>		: w <CR> : !clear; riscv64-unknown-linux-gnu-gcc -march=rv32imac -mabi=ilp32 -g -Wall %:t -o %:t:r <CR>
 "map <F12>		: w <CR> : !clear; gcc -g -Wall %:t -o %:t:r && ./%:t:r<CR>

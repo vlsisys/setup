@@ -8,6 +8,7 @@ export	PS1="[\[\e[0;36m\]\u - \[\e[0;37m\]\D{%Y.%m.%d} \t\[\e[0;39m\]]\n\[\e[0;3
 export	GDK_SCALE=1
 #source	/opt/pkg/petalinux-v2021.1/settings.sh
 #source	/tools/Xilinx/Vivado/2020.2/settings64.sh
+tmux
 
 # ----------------------------------------------
 # [Alias]: empty space is not allowed btw. alias & cmd
