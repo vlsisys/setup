@@ -25,7 +25,7 @@ alias	untar='tar -xvf $1'
 alias	untargz='tar -zxvf $1'
 alias	rvgdb='riscv64-unknown-linux-gnu-gdb $1'
 alias	rvdump='riscv64-unknown-linux-gnu-objdump -S $1'
-alias	vg='source ~/venv/gem5/bin/activate'
+alias	vg='source ~/.venv/gem5/bin/activate'
 alias	gem5='~/projects/gem5/build/RISCV/gem5.opt $1'
 
 # ----------------------------------------------

@@ -11,10 +11,8 @@ sudo	cp -rf 		./fonts/Sudo			/usr/share/fonts/truetype/
 sudo	cp -rf 		./fonts/VictorMono		/usr/share/fonts/truetype/
 sudo	cp -rf 		./fonts/JetBrainsMono	/usr/share/fonts/truetype/
 
-cd ~
-ln -s 		./setup/utils			utils				
-ln -s 		./setup/templates		templates			
-ln -s 		./setup/.vim			.vim				
-ln -s  		./setup/.bash_aliases	.bash_aliases		
-ln -s  		./setup/.vimrc			.vimrc			
-cd ./setup
+ln -s 		utils			/home//utils				
+ln -s 		templates		/home//templates			
+ln -s 		.vim			/home//.vim				
+ln -s  		.bash_aliases	/home//.bash_aliases		
+ln -s  		.vimrc			/home//.vimrc			
