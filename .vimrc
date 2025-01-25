@@ -149,6 +149,7 @@ nmap \m			:call cstFuncs#ToggleGUIMenu()<CR>
 nmap ga			:Tabularize /
 
 map ,n			:noh<CR>
+map ,f			:%! find ./ -type f \| xargs grep -i "
 map ,,i			:call verilog#VInst(0)<CR>
 map ,,t			:call verilog#VInst(1)<CR>
 

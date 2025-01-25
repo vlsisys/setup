@@ -16,8 +16,8 @@ tmux
 alias	src='source ~/.bashrc'
 alias	g='gvim -p  > /dev/null'
 #alias	g='gvim -v'
-#alias	t='gnome-terminal --disable-factory&'
-alias	t='gnome-terminal --geometry=108x18&'
+alias	t='gnome-terminal --disable-factory&'
+#alias	t='gnome-terminal --geometry=108x18&'
 alias	ju='jupyter-lab --no-browser --ServerApp.root_dir=~/project'
 alias	gitpush='git add .; git commit -m 'comment'; git push -u origin +master;'
 alias	ipy2py='jupyter nbconvert --to python $1'
@@ -25,8 +25,12 @@ alias	untar='tar -xvf $1'
 alias	untargz='tar -zxvf $1'
 alias	rvgdb='riscv64-unknown-linux-gnu-gdb $1'
 alias	rvdump='riscv64-unknown-linux-gnu-objdump -S $1'
-alias	vg='source ~/venv/gem5/bin/activate'
+alias	vg='source ~/.venv/gem5/bin/activate'
 alias	gem5='~/projects/gem5/build/RISCV/gem5.opt $1'
+alias	gem5-all='~/projects/gem5/build/ALL/gem5.opt $1'
+alias	gem5-x86='~/projects/gem5/build/X86/gem5.opt $1'
+alias	gemd='~/projects/gem5/build/RISCV/gem5.opt --debug-flags="$1" $2'
+alias	gccrv='riscv64-unknown-linux-gnu-gcc -static $1'
 
 # ----------------------------------------------
 # [Functions]
@@ -90,3 +94,5 @@ function	rvgcc(){
 	#-march=rv32i -mabi=ilp32 -o $1.o $1 ctr0local.S -lgcc
 
 }
+
+export	-f rvgcc
