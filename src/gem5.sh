@@ -6,9 +6,10 @@
 echo '=============================='
 echo ' Requirements for gem5'
 echo '=============================='
-sudo apt-get -y install build-essential git m4 scons zlib1g zlib1g-dev libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev python3-dev python3
-sudo apt-get -y install libboost-all-dev
-
+sudo apt install build-essential scons python3-dev git pre-commit zlib1g zlib1g-dev \
+    libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev \
+    libboost-all-dev  libhdf5-serial-dev python3-pydot python3-venv python3-tk mypy \
+    m4 libcapstone-dev libpng-dev libelf-dev pkg-config wget cmake doxygen
 
 # --------------------------------------------------
 # [Getting the code]
@@ -25,5 +26,4 @@ git clone https://github.com/gem5/gem5
 echo '=============================='
 echo ' Python Virtual Environment'
 echo '=============================='
-mkdir -p ~/venv && cd ~/venv/
-python3 -m venv gem5
+python3 -m venv ~/.venv/gem5

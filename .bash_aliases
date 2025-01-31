@@ -30,7 +30,9 @@ alias	gem5='~/projects/gem5/build/RISCV/gem5.opt $1'
 alias	gem5-all='~/projects/gem5/build/ALL/gem5.opt $1'
 alias	gem5-x86='~/projects/gem5/build/X86/gem5.opt $1'
 alias	gemd='~/projects/gem5/build/RISCV/gem5.opt --debug-flags="$1" $2'
+alias	gem5BuildRiscv='cd ~/projects/gem5/; scons build/RISCV/gem5.opt -j`nproc`'
 alias	gccrv='riscv64-unknown-linux-gnu-gcc -static $1'
+alias	find_string='find . -type f | xargs grep -i "$1"'
 
 # ----------------------------------------------
 # [Functions]
