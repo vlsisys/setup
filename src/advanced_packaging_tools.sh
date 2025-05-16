@@ -24,9 +24,9 @@ sudo apt-get -y install tmux
 # --------------------------------------------------
 # [Verilog Dev. Environment]
 # --------------------------------------------------
-#echo '=============================='
-#echo ' Install Verilog Dev. Env.'
-#echo '=============================='
-#sudo apt-get -y install iverilog
-#sudo apt-get -y install gtkwave
-#sudo apt-get -y install verilator
+echo '=============================='
+echo ' Install Verilog Dev. Env.'
+echo '=============================='
+sudo apt-get -y install iverilog
+sudo apt-get -y install gtkwave
+sudo apt-get -y install verilator
