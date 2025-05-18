@@ -9,7 +9,7 @@ export	VERILATOR_ROOT=/home/woong/projects/cva6/tools/verilator
 #export	PATH=$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:$OSS_CAD_SUITE/bin:~/.local/bin
 export	PS1="[\[\e[0;36m\]\u - \[\e[0;37m\]\D{%Y.%m.%d} \t\[\e[0;39m\]]\n\[\e[0;31m\]\${PWD}: \[\e[0;39m\]"
 #export	DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export	GDK_SCALE=2
+export	GDK_SCALE=1
 #source	/opt/pkg/petalinux-v2021.1/settings.sh
 #source	/tools/Xilinx/Vivado/2020.2/settings64.sh
 source	/home/woong/tools/Xilinx/Vivado/2024.2/settings64.sh
