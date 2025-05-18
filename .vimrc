@@ -10,7 +10,7 @@ set guioptions-=T
 set guioptions-=l
 set guioptions-=r
 set guioptions-=b				"m: menu, T: toolbar, l,r,b: scrollbar
-set guifont=Victor\ Mono\ Light\ 7
+set guifont=Victor\ Mono\ Light\ 12
 set laststatus=2				" Set whether or not to display a status line in the last window
 set lazyredraw					" The screen does not update when you are in the middle of an action (such as a macro)
 set linebreak					" Lines are truncated on a word-by-word basis
