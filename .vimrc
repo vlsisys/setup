@@ -10,11 +10,13 @@ set guioptions-=T
 set guioptions-=l
 set guioptions-=r
 set guioptions-=b				"m: menu, T: toolbar, l,r,b: scrollbar
-set guifont=Victor\ Mono\ Light\ 12
+"set guifont=Victor\ Mono\ Light\ 13
+set guifont=Ioskeley\ Mono\ Light\ 13
+"set guifont=Jetbrains\ Mono\ Light\ 13
 set laststatus=2				" Set whether or not to display a status line in the last window
 set lazyredraw					" The screen does not update when you are in the middle of an action (such as a macro)
 set linebreak					" Lines are truncated on a word-by-word basis
-set linespace=2					" Set the distance between rows, default is 0
+set linespace=4					" Set the distance between rows, default is 0
 set	number						" Shows the line number on the left side of the screen
 set	numberwidth=4				" Sets the width of the line number on the left side of the screen. The default is 4
 set	relativenumber				" Show line numbers relative to cursor position
@@ -92,10 +94,14 @@ set	visualbell					" Notify you on screen when an error occurs without beeping
 "==================================================
 " gruvbox
 set	background=dark
-"let	g:gruvbox_contrast_dark='soft'
-"let	g:gruvbox_contrast_dark='hard'
-let	g:gruvbox_italic=1
 set	termguicolors
+
+"let	g:gruvbox_contrast_dark='soft'
+let	g:gruvbox_contrast_dark='hard'
+let	g:gruvbox_italic=1
+
+"colorscheme	retrobox
+"colorscheme	slate
 colorscheme	gruvbox
 
 " plugin:nerdtree&tagbar
